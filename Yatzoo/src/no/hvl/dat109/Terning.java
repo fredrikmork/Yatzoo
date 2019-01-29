@@ -10,7 +10,11 @@ public class Terning {
 			verdi="";
 		}
 		
-		public String resultat() {
+		/**
+		 * 
+		 * @return Returnerer resultatet av trillingen
+		 */
+		public void resultat() {
 			String resultat ="";
 			int tall;
 			Random random = new Random();
@@ -18,7 +22,7 @@ public class Terning {
 			switch(tall){
 			
 			case 0:
-				resultat = "løve";
+				resultat = "love";
 				break;
 			case 1:
 				resultat = "slange";
@@ -37,7 +41,7 @@ public class Terning {
 				break;
 			
 			}
-			return resultat;
+			setDyr(resultat);
 		}
 		public String getDyr() {
 			return verdi;
