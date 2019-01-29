@@ -15,22 +15,29 @@ public class YatzooSpillet {
 
 	}
 
-	public void spillTrekk() {
+	public void spillTrekk(Spiller spiller) {
 		boolean fornoyd = false;
-		int i=0;
-		while(!fornoyd && i < 3) {
-			
+		int trykk = 0;
+		while (!fornoyd && trykk < 3) {
+			if (spiller.trykk()) {
+				terningSett.trillTerninger(terningSett.getTerningSett().size() - spiller.getBehold.size());
+				trykk++;
+			}
 		}
 	}
 
 	public void spillRunde() {
+		int runder = 12;
+		for (int i = 0; i < runder; i++) {
+			for (Spiller s : spillere) {
+				spillTrekk(s);
+			}
+		}
 
 	}
 
 	public Spiller spillerVant() {
-		Spiller spiller = null;
-
-		return spiller;
+		return(regelBok.visResultat());
 	}
 
 	public ArrayList<Spiller> getSpillere() {
