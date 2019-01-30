@@ -8,13 +8,21 @@ public class YatzooSpillet {
 	private TerningSett terningSett;
 	private RegelBok regelBok;
 
+	
+	/**
+	 * standar konstruktor
+	 */
 	public YatzooSpillet() {
 		terningSett = new TerningSett(5);
 		resultatBlokk = new ResultatBlokk();
 		regelBok = new RegelBok();
 
 	}
-
+	
+	/**
+	 * spiller trekk venter på input fra spiller for aa kaste terning og beholde osv
+	 * @param spiller Spiller som skal gjøre trekket.
+	 */
 	public void spillTrekk(Spiller spiller) {
 		boolean fornoyd = false;
 		//trenger maate aa faa et input som sier om spiller triller, saann at ikke spillTrekk()
@@ -27,9 +35,11 @@ public class YatzooSpillet {
 			}
 		}
 	}
-
+	/**
+	 * Spiller runder basert på hvor mange spillere som spiller spillet
+	 */
 	public void spillRunde() {
-		int runder = 12;
+		int runder = spillere.size();
 		for (int i = 0; i < runder; i++) {
 			for (Spiller s : spillere) {
 				spillTrekk(s);
@@ -37,7 +47,11 @@ public class YatzooSpillet {
 		}
 
 	}
-
+	
+	/**
+	 * finner spillerene som vant ved hjelp av resultatBlokken
+	 * @return Spiller: spilleren som vant
+	 */
 	public Spiller spillerVant() {
 		Spiller vinner;
 		int[] resultater = (resultatBlokk.visResultat());
