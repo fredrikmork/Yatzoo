@@ -78,3 +78,13 @@ Caused by: java.nio.file.NoSuchFileException: /Users/fredrikgarsegmork/Dokumente
 	at com.google.common.util.concurrent.AbstractIdleService$DelegateService$2.run(AbstractIdleService.java:79)
 	at com.google.common.util.concurrent.Callables$4.run(Callables.java:122)
 	... 1 more
+!SESSION 2019-01-30 12:52:24.339 -----------------------------------------------
+eclipse.buildId=4.7.3.M20180330-0640
+java.version=1.8.0_144
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=nb_NO
+Framework arguments:  -product org.eclipse.epp.package.java.product -keyring /Users/fredrikgarsegmork/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.java.product -keyring /Users/fredrikgarsegmork/.eclipse_keyring
+
+!ENTRY org.eclipse.core.net 1 0 2019-01-30 12:52:28.502
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
