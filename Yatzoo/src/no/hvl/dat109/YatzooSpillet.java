@@ -39,7 +39,26 @@ public class YatzooSpillet {
 	}
 
 	public Spiller spillerVant() {
-		ArrayList<Integer> resultater = (regelBok.visResultat());
+		Spiller vinner;
+		int[] resultater = (resultatBlokk.visResultat());
+		if(resultater[0] == 1) {
+			vinner = spillere.get(0);
+		}
+		if(resultater[0] == 2) {
+			vinner = spillere.get(1);
+		}
+		if(resultater[0] == 3) {
+			vinner = spillere.get(2);
+		}
+		if(resultater[0] == 4) {
+			vinner = spillere.get(3);
+		}
+		else {
+			vinner = spillere.get(4);
+		}
+		
+		return vinner;
+		
 	}
 
 	public ArrayList<Spiller> getSpillere() {

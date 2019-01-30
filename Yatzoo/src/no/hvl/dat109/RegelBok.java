@@ -136,4 +136,14 @@ public class RegelBok {
 		return sum;
 	}
 
+	public TerningSett getTerningene() {
+		return terningene;
+	}
+
+	public void setTerningene(TerningSett terningene) {
+		this.terningene = terningene;
+	}
+	
+	
+	
 }
