@@ -43,10 +43,18 @@ public class Terning {
 			}
 			setDyr(resultat);
 		}
+		/**
+		 * henter verdien som vises paa terningen
+		 * @return String med dyret som terningen viser
+		 */
 		public String getDyr() {
 			return verdi;
 		}
-
+		/**
+		 * setter verdien en terning har, slik at man kan lagre
+		 * en terning med en gitt verdi
+		 * @param verdi String med dyrenavnet
+		 */
 		public void setDyr(String verdi) {
 			this.verdi = verdi;
 		}

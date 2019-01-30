@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class TerningSett {
 	//Objektvariabler
-	ArrayList<Terning> terningSett;
+	private ArrayList<Terning> terningSett;
 	
 	//Konstruktør
 	public TerningSett() {
@@ -30,5 +30,15 @@ public class TerningSett {
 		
 		return null;
 	}
+
+	public ArrayList<Terning> getTerningSett() {
+		return terningSett;
+	}
+
+	public void setTerningSett(ArrayList<Terning> terningSett) {
+		this.terningSett = terningSett;
+	}
+	
+	
 
 }

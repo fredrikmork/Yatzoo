@@ -17,11 +17,13 @@ public class YatzooSpillet {
 
 	public void spillTrekk(Spiller spiller) {
 		boolean fornoyd = false;
-		int trykk = 0;
-		while (!fornoyd && trykk < 3) {
-			if (spiller.trykk()) {
-				terningSett.trillTerninger(terningSett.getTerningSett().size() - spiller.getBehold.size());
-				trykk++;
+		//trenger maate aa faa et input som sier om spiller triller, saann at ikke spillTrekk()
+		//bare fortsetter aa trille. har midlertidig valgtAaTrille tenkt som en boolean som 
+		//sier om en spiller triller :)
+		while (!fornoyd) {
+			if (spiller.isValgtAaTrille()) {
+				terningSett.trillTerninger(terningSett.getTerningSett().size() - 
+						spiller.getBehold().getTerningSett().size());
 			}
 		}
 	}
@@ -37,7 +39,7 @@ public class YatzooSpillet {
 	}
 
 	public Spiller spillerVant() {
-		return(regelBok.visResultat());
+		ArrayList<Integer> resultater = (regelBok.visResultat());
 	}
 
 	public ArrayList<Spiller> getSpillere() {

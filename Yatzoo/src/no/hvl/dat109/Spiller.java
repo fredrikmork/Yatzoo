@@ -7,6 +7,7 @@ public class Spiller {
 	private String navn;
 	private TerningSett behold;
 	private int antallBehold;
+	private boolean valgtAaTrille = false;
 	
 	
 
@@ -28,7 +29,7 @@ public class Spiller {
 			t.resultat();
 			index = terninger.getTerningSett().indexOf(t);
 			terning = terninger.getTerningSett().get(index);
-			TerningSett.getTerningSett().add(terning);
+			terninger.getTerningSett().add(terning);
 		}
 		this.behold = trilletSett;
 		
@@ -54,5 +55,20 @@ public class Spiller {
 	public void setBehold(TerningSett behold) {
 		this.behold = behold;
 	}
+	
+	public TerningSett getBehold() {
+		return behold;
+	}
+	
+
+	public boolean isValgtAaTrille() {
+		return valgtAaTrille;
+	}
+
+	public void setValgtAaTrille(boolean valgtAaTrille) {
+		this.valgtAaTrille = valgtAaTrille;
+	}
+
+	
 
 }
