@@ -6,7 +6,9 @@ public class TerningSett {
 	//Objektvariabler
 	private ArrayList<Terning> terningSett;
 	
-	//Konstruktør
+	/**
+	 * Konstruktor
+	 */
 	public TerningSett() {
 		super();
 	}
@@ -38,7 +40,5 @@ public class TerningSett {
 	public void setTerningSett(ArrayList<Terning> terningSett) {
 		this.terningSett = terningSett;
 	}
-	
-	
 
 }
