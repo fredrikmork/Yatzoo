@@ -6,7 +6,7 @@ public class RegelBok {
 
 	/**
 	 * 
-	 * @param terningene
+	 * @param terningenbgere
 	 *            som arraylist
 	 * @return sum av antall løver i kastet
 	 */
