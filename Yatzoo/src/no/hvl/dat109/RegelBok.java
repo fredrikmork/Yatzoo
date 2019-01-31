@@ -8,8 +8,8 @@ public class RegelBok {
 
 	/**
 	 * 
-	 * @param terningenbgere
-	 *            som arraylist
+	 * @param TerningSett terningene og String navnet paa dyret
+	 * 
 	 * @return sum av antall dyr i kastet
 	 */
 	public int dyr(TerningSett terningene, String dyr) {
@@ -24,9 +24,9 @@ public class RegelBok {
 
 	/**
 	 * 
-	 * @param terningene
-	 * @param n
-	 * @return hvilket dyr som har n-like
+	 * @param TerningsSett: terningene
+	 * @param int n antall like terninger
+	 * @return String, hvilket dyr som har n-like
 	 */
 	public String nLike(TerningSett terningene, int n) {
 		ArrayList<Terning> terningListe = terningene.getTerningSett();
