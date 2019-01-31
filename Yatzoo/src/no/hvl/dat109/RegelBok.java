@@ -12,7 +12,7 @@ public class RegelBok {
 	 *            som arraylist
 	 * @return sum av antall dyr i kastet
 	 */
-	public int love(TerningSett terningene, String dyr) {
+	public int dyr(TerningSett terningene, String dyr) {
 		int sum = 0;
 		for (Terning t : terningene.getTerningSett()) {
 			if (t.getDyr().equals(dyr)) {
