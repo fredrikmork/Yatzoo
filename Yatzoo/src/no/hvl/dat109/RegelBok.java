@@ -1,5 +1,7 @@
 package no.hvl.dat109;
 
+import java.util.ArrayList;
+
 public class RegelBok {
 
 	private TerningSett terningene;
@@ -8,102 +10,33 @@ public class RegelBok {
 	 * 
 	 * @param terningenbgere
 	 *            som arraylist
-	 * @return sum av antall løver i kastet
+	 * @return sum av antall dyr i kastet
 	 */
-	public int love(TerningSett terningene) {
+	public int love(TerningSett terningene, String dyr) {
 		int sum = 0;
 		for (Terning t : terningene.getTerningSett()) {
-			if (t.getDyr().equals("love")) {
+			if (t.getDyr().equals(dyr)) {
 				sum += 1;
 			}
 		}
 		return sum;
 	}
 
-	/**
-	 * 
-	 * @param terningene
-	 *            som arraylist
-	 * @return sum av antall slanger i kastet
-	 */
-	public int slange(TerningSett terningene) {
+	public String treLike(TerningSett terningene) {
+		ArrayList<Terning> terningListe = terningene.getTerningSett();
 		int sum = 0;
-		for (Terning t : terningene.getTerningSett()) {
-			if (t.getDyr().equals("slange")) {
-				sum += 1;
+		String dyr = "";
+		for(int i=0; i< terningListe.size(); i++) {
+			for(int j = i + 1; j < terningListe.size(); j++) {
+				if (terningListe.listIterator(i).equals(terningListe.listIterator(j))) {
+					sum += 1;
+					if (sum == 3) {
+						dyr = terningListe.listIterator(i).toString();
+					}
+				}
 			}
 		}
-		return sum;
-	}
-
-	/**
-	 * 
-	 * @param terningene
-	 *            som arraylist
-	 * @return sum av antall panda i kastet
-	 */
-	public int panda(TerningSett terningene) {
-		int sum = 0;
-		for (Terning t : terningene.getTerningSett()) {
-			if (t.getDyr().equals("panda")) {
-				sum += 1;
-			}
-		}
-		return sum;
-	}
-
-	/**
-	 * 
-	 * @param terningene
-	 *            som arraylist
-	 * @return sum av antall gris i kastet
-	 */
-	public int gris(TerningSett terningene) {
-		int sum = 0;
-		for (Terning t : terningene.getTerningSett()) {
-			if (t.getDyr().equals("gris")) {
-				sum += 1;
-			}
-		}
-		return sum;
-	}
-
-	/**
-	 * 
-	 * @param terningene
-	 *            som arraylist
-	 * @return sum av antall elefant i kastet
-	 */
-	public int elefant(TerningSett terningene) {
-		int sum = 0;
-		for (Terning t : terningene.getTerningSett()) {
-			if (t.getDyr().equals("elefant")) {
-				sum += 1;
-			}
-		}
-		return sum;
-	}
-
-	/**
-	 * 
-	 * @param terningene
-	 *            som arraylist
-	 * @return sum av antall hvaler i kastet
-	 */
-	public int hval(TerningSett terningene) {
-		int sum = 0;
-		for (Terning t : terningene.getTerningSett()) {
-			if (t.getDyr().equals("hval")) {
-				sum += 1;
-			}
-		}
-		return sum;
-	}
-
-	public int treLike(TerningSett terningene) {
-		int sum = 0;
-
-		return sum;
+		return dyr;
 	}
 
 	public int fireLike(TerningSett terningene) {
