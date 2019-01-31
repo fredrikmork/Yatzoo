@@ -22,15 +22,21 @@ public class RegelBok {
 		return sum;
 	}
 
-	public String treLike(TerningSett terningene) {
+	/**
+	 * 
+	 * @param terningene
+	 * @param n
+	 * @return hvilket dyr som har n-like
+	 */
+	public String nLike(TerningSett terningene, int n) {
 		ArrayList<Terning> terningListe = terningene.getTerningSett();
-		int sum = 0;
 		String dyr = "";
 		for(int i=0; i< terningListe.size(); i++) {
+			int sum = 0;
 			for(int j = i + 1; j < terningListe.size(); j++) {
 				if (terningListe.listIterator(i).equals(terningListe.listIterator(j))) {
 					sum += 1;
-					if (sum == 3) {
+					if (sum == n) {
 						dyr = terningListe.listIterator(i).toString();
 					}
 				}
