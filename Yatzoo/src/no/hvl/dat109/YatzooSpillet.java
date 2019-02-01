@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class YatzooSpillet {
+	private static final int  MAXTERNINGER = 5;
 	private ArrayList<Spiller> spillere;
 	private ResultatBlokk resultatBlokk;
 	private TerningSett terningSett;
@@ -18,6 +19,7 @@ public class YatzooSpillet {
 		terningSett = new TerningSett(5);
 		resultatBlokk = new ResultatBlokk();
 		regelBok = new RegelBok();
+		
 
 	}
 
@@ -84,47 +86,55 @@ public class YatzooSpillet {
 
 	/**
 	 * spiller trekk venter på input fra spiller for aa kaste terning og beholde osv
-	 * 
-	 * @param spiller
-	 *            Spiller som skal gjøre trekket.
+	 * mye greier i denne metode, maa refraktorere det til flere minder metoder for 
+	 * aa faa mer orden
+	 * @param spiller, Spiller som skal gjre trekket.
 	 */
 	public void spillTrekk(Spiller spiller) {
-		boolean fornoyd = false;
+		this.terningSett = new TerningSett(5);
 		JOptionPane.showMessageDialog(null, spiller.getNavn() + " sin tur!");
-
-		// trenger maate aa faa et input som sier om spiller triller, saann at ikke
-		// spillTrekk()
-		// bare fortsetter aa trille. har midlertidig valgtAaTrille tenkt som en boolean
-		// som
-		// sier om en spiller triller :)
+		kastTerninger(spiller);
+		JOptionPane.showMessageDialog(null, "runde Resultat: " + spiller.getBehold().toString());
+	}
+	
+	
+	public void kastTerninger(Spiller spiller) {
+		boolean fornoyd = false;
 		int kast = 0;
 		while (!fornoyd && kast < 3) {
 			JOptionPane.showMessageDialog(null, "Trill terninger!");
 			TerningSett trillet = terningSett.trillTerninger(this.terningSett);
 			JOptionPane.showMessageDialog(null, "Resultat: " + trillet.toString());
+			kast++;
+			
+			leggTilSide(spiller, trillet);
+			if(spiller.getAntallBehold() == 5) {
+				fornoyd = true;
+			}
+			
+			JOptionPane.showMessageDialog(null, "terninger du beholder: " + spiller.getBehold().toString());
+			int resterendeTerninger = MAXTERNINGER - spiller.getBehold().getTerningSett().size();
+			this.terningSett = new TerningSett(resterendeTerninger);
+			
+			if(kast == 3) {
+				continue;
+			}
 			int omTrill = JOptionPane.showConfirmDialog(null, "trille igjen?", "trille igjen?",
 					JOptionPane.YES_NO_OPTION);
 			if (omTrill != 0) {
 				fornoyd = true;
-				if (terningSett.getTerningSett() != null) {
-					for (Terning t : terningSett.getTerningSett()) {
-						spiller.getBehold().leggTilTerning(t);
-					}
-				}
 			}
-			leggTilSide(spiller, trillet);
-			JOptionPane.showMessageDialog(null, "terninger du beholder: " + spiller.getBehold().toString());
-			this.terningSett = new TerningSett(
-					this.terningSett.getTerningSett().size() - spiller.getBehold().getTerningSett().size());
-			kast++;
 		}
-		JOptionPane.showMessageDialog(null, "runde Resultat: " + spiller.getBehold().toString());
 	}
 
 	public void leggTilSide(Spiller spiller, TerningSett trillet) {
+		if(trillet.getTerningSett().size() <= 1) {
+			spiller.getBehold().leggTilTerning(trillet.getTerningSett().get(0));
+			return;
+		}
 		String beholde = JOptionPane.showInputDialog(null,
 				"skriv inn tallet paa terningene " + "du vil beholde" + trillet.toString());
-		if (beholde.isEmpty()) {
+		if (beholde.isEmpty() || beholde.equals("")) {
 			return;
 		}
 		String[] beholdeArray = beholde.split("");

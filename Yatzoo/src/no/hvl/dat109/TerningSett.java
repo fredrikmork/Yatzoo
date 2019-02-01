@@ -39,7 +39,7 @@ public class TerningSett {
 	public void leggTilTerning(Terning terning) {
 		terningSett.add(terning);
 	}
-
+	
 	public ArrayList<Terning> getTerningSett() {
 		return terningSett;
 	}
