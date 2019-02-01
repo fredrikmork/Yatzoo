@@ -23,7 +23,7 @@ public class Spiller {
 	 */
 	public Spiller(String navn) {
 		this.navn = navn;
-		this.behold = new TerningSett(5);
+		this.behold = new TerningSett();
 	}
 	/**
 	 * triller alle terningene i et terningssett, får hvor mange terninger det er i terningssettet fra 
