@@ -10,7 +10,7 @@ public class TerningSett {
 	 * Konstruktor
 	 */
 	public TerningSett() {
-		super();
+		terningSett = new ArrayList<Terning>();
 	}
 	
 	public TerningSett(int antallTerninger) {
@@ -24,13 +24,20 @@ public class TerningSett {
 	//Metoder
 	/**
 	 * Triller antall terninger som er angitt
-	 * @param Antall terninger som skal trilles, maks 5
-	 * @return Returnerer en liste med terninger som ble trilt
+	 * @param TerningSett, det terningssettet som skal trilles
+	 * @return Returnerer et terningsSett med terninger som ble trilt
 	 */
-	public ArrayList<Terning> trillTerninger(int antall){
-		
-		
-		return null;
+	public TerningSett trillTerninger(TerningSett terningSett){
+		TerningSett etterTrill = new TerningSett();
+		for(Terning t: terningSett.getTerningSett()) {
+			t.resultat();
+			etterTrill.leggTilTerning(t);
+		}
+		return etterTrill;
+	}
+	
+	public void leggTilTerning(Terning terning) {
+		terningSett.add(terning);
 	}
 
 	public ArrayList<Terning> getTerningSett() {
@@ -40,5 +47,17 @@ public class TerningSett {
 	public void setTerningSett(ArrayList<Terning> terningSett) {
 		this.terningSett = terningSett;
 	}
+	
+	public String toString() {
+		String toString = "";
+		int index = 1;
+		for(Terning t: terningSett) {
+			toString += index + ": " + t.getDyr() + " ";
+			index++;
+		}
+		return toString;
+		
+	}
+	
 
 }

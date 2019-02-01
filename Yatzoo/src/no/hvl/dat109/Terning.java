@@ -12,11 +12,13 @@ public class Terning {
 		
 		/**
 		 * 
-		 * @return Returnerer resultatet av trillingen
+		 * triller terning og setter verdien av trillingen til den 
+		 * terninger som ble trillet til det resultatet av trillingen ble :S
+		 * 
 		 */
 		public void resultat() {
-			String resultat ="";
 			int tall;
+			String resultat = "";
 			Random random = new Random();
 			tall = (random.nextInt(5));
 			switch(tall){
