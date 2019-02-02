@@ -137,7 +137,6 @@ public class YatzooSpillet {
 			int resterendeTerninger = MAXTERNINGER - spiller.getBehold().getTerningSett().size();
 			this.terningSett = new TerningSett(resterendeTerninger);
 
-			System.out.println(spiller.getBehold().getAntallTerninger());
 			if (spiller.getBehold().getAntallTerninger()== 5) {
 				fornoyd = true;
 				continue;
