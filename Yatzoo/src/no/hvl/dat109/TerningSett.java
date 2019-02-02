@@ -5,12 +5,14 @@ import java.util.ArrayList;
 public class TerningSett {
 	//Objektvariabler
 	private ArrayList<Terning> terningSett;
+	private int antallTerninger;
 	
 	/**
 	 * Konstruktor
 	 */
 	public TerningSett() {
 		terningSett = new ArrayList<Terning>();
+		antallTerninger = 0;
 	}
 	
 	public TerningSett(int antallTerninger) {
@@ -18,6 +20,8 @@ public class TerningSett {
 		for (int i = 0; i < antallTerninger; i++) {
 			terningSett.add(new Terning());
 		}
+		
+		this.antallTerninger = antallTerninger;
 		
 	}
 	
@@ -38,6 +42,7 @@ public class TerningSett {
 	
 	public void leggTilTerning(Terning terning) {
 		terningSett.add(terning);
+		antallTerninger ++;
 	}
 	
 	public ArrayList<Terning> getTerningSett() {
@@ -58,6 +63,15 @@ public class TerningSett {
 		return toString;
 		
 	}
+
+	public int getAntallTerninger() {
+		return antallTerninger;
+	}
+
+	public void setAntallTerninger(int antallTerninger) {
+		this.antallTerninger = antallTerninger;
+	}
+	
 	
 
 }

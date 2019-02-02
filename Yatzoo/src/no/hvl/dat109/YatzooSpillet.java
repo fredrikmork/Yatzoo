@@ -31,6 +31,39 @@ public class YatzooSpillet {
 		spillere.add(spiller);
 	}
 
+	public int leggTilSpillereIAktivtSpill() {
+		boolean rettInput = false;
+		int antallSpillereTilInt = 0;
+		try {
+			while (!rettInput) {
+				String inputAntallSpillere = JOptionPane.showInputDialog(null, "antall spilere(maks 5): ");
+				antallSpillereTilInt = Integer.parseInt(inputAntallSpillere);
+				if (antallSpillereTilInt > 5) {
+					JOptionPane.showMessageDialog(null, "Maks 5 spillere");
+				} else if (antallSpillereTilInt < 2) {
+					JOptionPane.showMessageDialog(null, "Minst 2 spillere");
+				} else {
+					rettInput = true;
+				}
+			}
+
+			// haandtering av feil input i input boksen
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "vennligst skriv et tall..");
+			startSpill(false);
+		}
+		// iterere gjennon alle spillere som spiller i spillet og hver spiller
+		// skriver sitt spillernavn
+		for (int antallSpillere = 0; antallSpillere < antallSpillereTilInt; antallSpillere++) {
+			int spillerNummer = antallSpillere + 1;
+			String melding = "skriv spiller" + spillerNummer + " sitt navn";
+			String SpillerNavnInput = JOptionPane.showInputDialog(null, melding);
+			Spiller spiller = new Spiller(SpillerNavnInput);
+			this.leggTilSpiller(spiller);
+		}
+		return antallSpillereTilInt;
+	}
+
 	/**
 	 * metoden som starter spillet hvis det er første runde blir spillere bedt om å
 	 * legge inn hvor mange spillere som skal spille og etter det blir de spurt om å
@@ -41,50 +74,22 @@ public class YatzooSpillet {
 	 *            foregaar, har med å feilmeldinger aa gjore.
 	 */
 	public void startSpill(boolean newGame) {
+		int antallSpillereTilInt = 0;
 		for (int runde = 0; runde < 12; runde++) {
-			int antallSpillereTilInt = 0;
 			if (runde == 1) {
-				try {
-					boolean rettInput = false;
-					if (newGame) {
-						JOptionPane.showMessageDialog(null, "new Game");
-					}
-					while (!rettInput) {
-						String inputAntallSpillere = JOptionPane.showInputDialog(null, "antall spilere(maks 5): ");
-						antallSpillereTilInt = Integer.parseInt(inputAntallSpillere);
-						if (antallSpillereTilInt > 5) {
-							JOptionPane.showMessageDialog(null, "Maks 5 spillere");
-						} else if (antallSpillereTilInt < 2) {
-							JOptionPane.showMessageDialog(null, "Minst 2 spillere");
-						} else {
-							rettInput = true;
-						}
-					}
-					
-					//haandtering av feil input i input boksen
-				} catch (NumberFormatException e) {
-					JOptionPane.showMessageDialog(null, "vennligst skriv et tall..");
-					startSpill(false);
-				} catch (NullPointerException e) {
-					JOptionPane.showMessageDialog(null, "vennligst skriv noe...");
-					startSpill(false);
-				}
-				//iterere gjennon alle spillere som spiller i spillet og hver spiller
-				//skriver sitt spillernavn
-				for (int antallSpillere = 0; antallSpillere < antallSpillereTilInt; antallSpillere++) {
-					int spillerNummer = antallSpillere + 1;
-					String melding = "skriv spiller" + spillerNummer + " sitt navn";
-					String SpillerNavnInput = JOptionPane.showInputDialog(null, melding);
-					Spiller spiller = new Spiller(SpillerNavnInput);
-					this.leggTilSpiller(spiller);
-				}
-				spillRunde();
-			} else {
-				for (int antallSpillere = 0; antallSpillere < antallSpillereTilInt; antallSpillere++) {
+				if (newGame) {
+					JOptionPane.showMessageDialog(null, "new Game");
+					antallSpillereTilInt = leggTilSpillereIAktivtSpill();
 					spillRunde();
+				} else {
+					antallSpillereTilInt = leggTilSpillereIAktivtSpill();
+					for (int antallSpillere = 0; antallSpillere < antallSpillereTilInt; antallSpillere++) {
+						spillRunde();
+					}
 				}
 			}
 		}
+		spillRunde();
 	}
 
 	/**
@@ -111,6 +116,7 @@ public class YatzooSpillet {
 	 * 
 	 */
 	public void kastTerninger(Spiller spiller) {
+		spiller.setBehold(new TerningSett());
 		boolean fornoyd = false;
 		int kast = 0;
 		// while lokke som gaar saa lenge spilleren er fornoy med kastet eller frem til
@@ -124,22 +130,20 @@ public class YatzooSpillet {
 			// etter trillTerninger metoden er kalt vil kast variablen oke.
 			kast++;
 
-			leggTilSide(spiller, trillet);
-			if (spiller.getAntallBehold() == 5) {
-				fornoyd = true;
-			}
+			leggTilSide(spiller, trillet, false);
+
 
 			JOptionPane.showMessageDialog(null, "terninger du beholder: " + spiller.getBehold().toString());
 			int resterendeTerninger = MAXTERNINGER - spiller.getBehold().getTerningSett().size();
 			this.terningSett = new TerningSett(resterendeTerninger);
 
-			if (kast == 3) {
+			System.out.println(spiller.getBehold().getAntallTerninger());
+			if (spiller.getBehold().getAntallTerninger()== 5) {
+				fornoyd = true;
 				continue;
 			}
-			int omTrill = JOptionPane.showConfirmDialog(null, "trille igjen?", "trille igjen?",
-					JOptionPane.YES_NO_OPTION);
-			if (omTrill != 0) {
-				fornoyd = true;
+			if (kast == 3) {
+				continue;
 			}
 		}
 	}
@@ -153,9 +157,24 @@ public class YatzooSpillet {
 	 * @param trillet
 	 *            TerningSett som spilleren skal velge hvilke terninger som skal
 	 *            beholdes fra
+	 * @param autoVelg 
+	 * 			boolean autovel sier om leggTilside skal skje automatisk eller 
+	 * 			ved at spilleren selv skal velge terningene.
 	 * 
 	 */
-	public void leggTilSide(Spiller spiller, TerningSett trillet) {
+	public void leggTilSide(Spiller spiller, TerningSett trillet, boolean autoVelg) {
+		
+		
+		if (autoVelg) {
+			try {
+				for (Terning t : trillet.getTerningSett()) {
+					spiller.getBehold().leggTilTerning(t);
+				}
+			} catch (NullPointerException e) {
+				e.printStackTrace();
+			}
+			return;
+		}
 		// hvis det kun er en terning i terningSettet vil ikke spilleren trenge aa velge
 		// saa metoden bare legger terningen til behold terningsettet og returnerer
 		// metoden,
@@ -175,9 +194,10 @@ public class YatzooSpillet {
 		// splitter inputstringen til en liste med hver enkelt karakter slik at det blir
 		// mulig aa gaa gjennom alle tallene spilleren skrev den ville beholde.
 		String[] beholdeArray = beholde.split("");
-		
-		//for hver charakter i beholdArray brukes det et switch statement for aa se 
-		//hvilke terning som spilleren ville beholde, slik at man sjekker det for hver terning.
+
+		// for hver charakter i beholdArray brukes det et switch statement for aa se
+		// hvilke terning som spilleren ville beholde, slik at man sjekker det for hver
+		// terning.
 		for (int i = 0; i < beholdeArray.length; i++) {
 			int tallet = Integer.parseInt(beholdeArray[i]);
 			switch (tallet) {

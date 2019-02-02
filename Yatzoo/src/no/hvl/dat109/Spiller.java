@@ -6,7 +6,6 @@ public class Spiller {
 	
 	private String navn;
 	private TerningSett behold;
-	private int antallBehold;
 	private boolean valgtAaTrille = false;
 	
 	
@@ -59,23 +58,9 @@ public class Spiller {
 	public void setNavn(String navn) {
 		this.navn = navn;
 	}
-	/**
-	 * get metode for antall ternigner spilleren vil beholde
-	 * @return int antall terninger spiller vil beholde
-	 */
-	public int getAntallBehold() {
-		return antallBehold;
-	}
-	/**
-	 * set metod for antall behold
-	 * @param antallBehold int
-	 */
-	public void setAntallBehold(int antallBehold) {
-		this.antallBehold = antallBehold;
-	}
 	
 	/**
-	 * setter en terninger som skal beholdes
+	 * setter terninger som skal beholdes
 	 * @param behold TerningsSett terninger
 	 */
 	public void setBehold(TerningSett behold) {
