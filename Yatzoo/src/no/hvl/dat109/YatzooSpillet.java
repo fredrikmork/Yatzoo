@@ -75,20 +75,25 @@ public class YatzooSpillet {
 	 */
 	public void startSpill(boolean newGame) {
 		int antallSpillereTilInt = 0;
+		String rundeStr = "";
 		for (int runde = 0; runde < 12; runde++) {
 			if (runde == 1) {
 				if (newGame) {
 					JOptionPane.showMessageDialog(null, "new Game");
 					antallSpillereTilInt = leggTilSpillereIAktivtSpill();
+					rundeStr = RundeNavn(runde);
+					JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
 					spillRunde();
 				} else {
 					antallSpillereTilInt = leggTilSpillereIAktivtSpill();
 					for (int antallSpillere = 0; antallSpillere < antallSpillereTilInt; antallSpillere++) {
+						JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
 						spillRunde();
 					}
 				}
 			}
 		}
+		JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
 		spillRunde();
 	}
 
@@ -132,12 +137,11 @@ public class YatzooSpillet {
 
 			leggTilSide(spiller, trillet, false);
 
-
 			JOptionPane.showMessageDialog(null, "terninger du beholder: " + spiller.getBehold().toString());
 			int resterendeTerninger = MAXTERNINGER - spiller.getBehold().getTerningSett().size();
 			this.terningSett = new TerningSett(resterendeTerninger);
 
-			if (spiller.getBehold().getAntallTerninger()== 5) {
+			if (spiller.getBehold().getAntallTerninger() == 5) {
 				fornoyd = true;
 				continue;
 			}
@@ -156,14 +160,13 @@ public class YatzooSpillet {
 	 * @param trillet
 	 *            TerningSett som spilleren skal velge hvilke terninger som skal
 	 *            beholdes fra
-	 * @param autoVelg 
-	 * 			boolean autovel sier om leggTilside skal skje automatisk eller 
-	 * 			ved at spilleren selv skal velge terningene.
+	 * @param autoVelg
+	 *            boolean autovel sier om leggTilside skal skje automatisk eller ved
+	 *            at spilleren selv skal velge terningene.
 	 * 
 	 */
 	public void leggTilSide(Spiller spiller, TerningSett trillet, boolean autoVelg) {
-		
-		
+
 		if (autoVelg) {
 			try {
 				for (Terning t : trillet.getTerningSett()) {
@@ -257,6 +260,49 @@ public class YatzooSpillet {
 
 		return vinner;
 
+	}
+
+	private String RundeNavn(int runde) {
+		String rundeNavn = " ";
+		switch (runde) {
+		case 1:
+			rundeNavn = "antall like lover";
+			break;
+		case 2:
+			rundeNavn = "antall like slanger";
+			break;
+		case 3:
+			rundeNavn = "antall like pandaer";
+			break;
+		case 4:
+			rundeNavn = "antall like griser";
+			break;
+		case 5:
+			rundeNavn = "antall like elefanter";
+			break;
+		case 6:
+			rundeNavn = "antall like hvaler";
+			break;
+		case 7:
+			rundeNavn = "tre like";
+			break;
+		case 8:
+			rundeNavn = "fire like";
+			break;
+		case 9:
+			rundeNavn = "to par";
+			break;
+		case 10:
+			rundeNavn = "hus (par og tre like)";
+			break;
+		case 11:
+			rundeNavn = "alle ulike";
+			break;
+		case 12:
+			rundeNavn = "YATZOO";
+			break;
+		}
+		return rundeNavn;
 	}
 
 	public ArrayList<Spiller> getSpillere() {
