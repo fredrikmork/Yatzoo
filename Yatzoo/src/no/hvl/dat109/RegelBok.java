@@ -50,10 +50,8 @@ public class RegelBok {
 	 */
 	public String toPar(TerningSett terningene) {
 		String parDyr = "";
-		for (Terning t : terningene.getTerningSett()) {
-			terningene.getTerningSett().stream().equals(t);
-			
-		}
+		String dyr1 = terningene.getTerningSett().stream().filter(x -> x.);
+		
 		
 		return parDyr;
 	}
