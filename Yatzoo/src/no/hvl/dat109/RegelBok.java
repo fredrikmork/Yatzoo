@@ -7,10 +7,9 @@ public class RegelBok {
 	private TerningSett terningene;
 
 	/**
-	 * 
-	 * @param terningenbgere
-	 *            som arraylist
-	 * @return sum av antall dyr i kastet
+	 * Poeng for et gitt dyr.
+	 * @param TerningSett terningene, String dyr
+	 * @return sum av antall dyr i terningkastet
 	 */
 	public int dyr(TerningSett terningene, String dyr) {
 		int sum = 0;
@@ -23,17 +22,16 @@ public class RegelBok {
 	}
 
 	/**
-	 * 
-	 * @param terningene
-	 * @param n
-	 * @return hvilket dyr som har n-like
+	 * Finner n-like av terningkast.
+	 * @param Terningsett terningene, int n, for 3,4 og 5 like.
+	 * @return hvilket dyr som har n-like.
 	 */
 	public String nLike(TerningSett terningene, int n) {
 		ArrayList<Terning> terningListe = terningene.getTerningSett();
 		String dyr = "";
-		for(int i=0; i< terningListe.size(); i++) {
+		for (int i = 0; i < terningListe.size(); i++) {
 			int sum = 0;
-			for(int j = i + 1; j < terningListe.size(); j++) {
+			for (int j = i + 1; j < terningListe.size(); j++) {
 				if (terningListe.listIterator(i).equals(terningListe.listIterator(j))) {
 					sum += 1;
 					if (sum == n) {
@@ -45,44 +43,47 @@ public class RegelBok {
 		return dyr;
 	}
 
-	public int fireLike(TerningSett terningene) {
-		int sum = 0;
-
-		return sum;
+	/**
+	 * Sjekker terningsett listen om det er to par der, printer ut de parene
+	 * @param TerningSett terningene
+	 * @return 
+	 */
+	public String toPar(TerningSett terningene) {
+		String parDyr = "";
+		for (Terning t : terningene.getTerningSett()) {
+			terningene.getTerningSett().stream().equals(t);
+			
+		}
+		
+		return parDyr;
 	}
 
-	public int toPar(TerningSett terningene) {
-		int sum = 0;
-
-		return sum;
-	}
-
+	/**
+	 * Et par og 3 like i et terningsett
+	 * @param TerningSett terningene.
+	 * @return dyrene det gjelder for
+	 */
 	public int hus(TerningSett terningene) {
 		int sum = 0;
 
 		return sum;
 	}
 
+	/**
+	 * Finner ut om alle terningene er unike.
+	 * @param TerningSett terningene
+	 * @return 1 poeng dersom det stemmer
+	 */
 	public int enAvHver(TerningSett terningene) {
 		int sum = 0;
-
+		long unike = terningene.getTerningSett()
+				.stream()
+				.distinct()
+				.count();
+		if (unike == 6) {
+			sum = 1;
+		}
 		return sum;
 	}
 
-	public int femLike(TerningSett terningene) {
-		int sum = 0;
-
-		return sum;
-	}
-
-	public TerningSett getTerningene() {
-		return terningene;
-	}
-
-	public void setTerningene(TerningSett terningene) {
-		this.terningene = terningene;
-	}
-	
-	
-	
 }
