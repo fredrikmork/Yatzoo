@@ -7,16 +7,9 @@ public class RegelBok {
 	private TerningSett terningene;
 
 	/**
-<<<<<<< HEAD
 	 * Poeng for et gitt dyr.
 	 * @param TerningSett terningene, String dyr
 	 * @return sum av antall dyr i terningkastet
-=======
-	 * 
-	 * @param TerningSett terningene og String navnet paa dyret
-	 * 
-	 * @return sum av antall dyr i kastet
->>>>>>> 61ffd067d3297d6b3926de731cba0964bc42aef0
 	 */
 	public int dyr(TerningSett terningene, String dyr) {
 		int sum = 0;
@@ -29,16 +22,9 @@ public class RegelBok {
 	}
 
 	/**
-<<<<<<< HEAD
 	 * Finner n-like av terningkast.
 	 * @param Terningsett terningene, int n, for 3,4 og 5 like.
 	 * @return hvilket dyr som har n-like.
-=======
-	 * 
-	 * @param TerningsSett: terningene
-	 * @param int n antall like terninger
-	 * @return String, hvilket dyr som har n-like
->>>>>>> 61ffd067d3297d6b3926de731cba0964bc42aef0
 	 */
 	public String nLike(TerningSett terningene, int n) {
 		ArrayList<Terning> terningListe = terningene.getTerningSett();
