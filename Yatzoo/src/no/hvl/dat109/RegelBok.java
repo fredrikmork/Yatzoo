@@ -63,11 +63,8 @@ public class RegelBok {
 	 * @return 
 	 */
 	public String toPar(TerningSett terningene) {
-		String parDyr = "";
-		String dyr1 = terningene.getTerningSett().stream().filter(x -> x.);
-		
-		
-		return parDyr;
+		//TODO
+		return "";
 	}
 
 	/**
@@ -76,9 +73,41 @@ public class RegelBok {
 	 * @return dyrene det gjelder for
 	 */
 	public int hus(TerningSett terningene) {
-		int sum = 0;
-
-		return sum;
+//		int sum = 0;
+//		ArrayList<Terning> terninger= terningene.getTerningSett();
+//		
+//		for(int i = 0; i < terningene.getAntallTerninger()-1; i++ ) { // dices is your integer array
+//			   switch( terninger.get(i) ) {
+//			      case 1: terninger.get(1) += 1; break;
+//			      // all other cases up to 6
+//			    }
+//			 }
+//		boolean trelike = false;
+//		boolean tolike = false;
+//		for (int i = 0; i < terningene.getAntallTerninger() - 1 && (!tolike || !trelike); i++) {
+//			if(!trelike && terninger.get(i) == 3) {
+//		          trelike = true; 
+//		       } else if(!tolike && terninger.get(i) == 2) {
+//		          tolike = true;
+//		       }
+//		}
+//		
+//		if(trelike && tolike) {
+//			sum = 1;
+//		}
+//		return sum;
+		for (int i = 0; i < terningene.getAntallTerninger()-1; i++) {
+			ArrayList<Terning> terninger = terningene.getTerningSett();
+			switch (terningene.getAntallTerninger()) {
+			
+			case terninger.indexOf():
+				
+				break;
+			
+			default:
+				break;
+			}
+		}
 	}
 
 	/**
