@@ -1,5 +1,11 @@
 package no.hvl.dat109;
 
+import java.util.Arrays;
+
+/**
+ * @author Perminow
+ *
+ */
 public class ResultatBlokk {
 	
 	private int[][] resultatTabell;
@@ -48,6 +54,13 @@ public class ResultatBlokk {
 	public void setResultatTabell(int[][] resultatTabell) {
 		this.resultatTabell = resultatTabell;
 	}
+
+	@Override
+	public String toString() {
+		return "ResultatBlokk [resultatTabell=" + Arrays.toString(resultatTabell) + "]";
+	}
+	
+
 	
 	
 	

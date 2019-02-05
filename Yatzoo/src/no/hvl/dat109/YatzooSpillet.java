@@ -1,6 +1,7 @@
 package no.hvl.dat109;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JOptionPane;
 
@@ -74,27 +75,28 @@ public class YatzooSpillet {
 	 *            foregaar, har med å feilmeldinger aa gjore.
 	 */
 	public void startSpill(boolean newGame) {
-		int antallSpillereTilInt = 0;
 		String rundeStr = "";
-		for (int runde = 0; runde < 12; runde++) {
+		for (int runde = 1; runde < 12; runde++) {
 			if (runde == 1) {
+				int antallSpillereTilInt = 0;
 				if (newGame) {
 					JOptionPane.showMessageDialog(null, "new Game");
 					antallSpillereTilInt = leggTilSpillereIAktivtSpill();
-					rundeStr = RundeNavn(runde);
+					rundeStr = rundeNavn(runde);
 					JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
-					spillRunde();
+					spillRunde(runde);
 				} else {
+					rundeStr = rundeNavn(runde);
 					antallSpillereTilInt = leggTilSpillereIAktivtSpill();
-					for (int antallSpillere = 0; antallSpillere < antallSpillereTilInt; antallSpillere++) {
-						JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
-						spillRunde();
-					}
+					JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
+					spillRunde(runde);
 				}
+			} else {
+				rundeStr = rundeNavn(runde);
+				JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
+				spillRunde(runde);
 			}
 		}
-		JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
-		spillRunde();
 	}
 
 	/**
@@ -134,6 +136,10 @@ public class YatzooSpillet {
 			JOptionPane.showMessageDialog(null, "Resultat: " + trillet.toString());
 			// etter trillTerninger metoden er kalt vil kast variablen oke.
 			kast++;
+			if (kast == 3) {
+				leggTilSide(spiller, trillet, true);
+				continue;
+			}
 
 			leggTilSide(spiller, trillet, false);
 
@@ -143,9 +149,6 @@ public class YatzooSpillet {
 
 			if (spiller.getBehold().getAntallTerninger() == 5) {
 				fornoyd = true;
-				continue;
-			}
-			if (kast == 3) {
 				continue;
 			}
 		}
@@ -225,14 +228,37 @@ public class YatzooSpillet {
 	/**
 	 * Spiller runder basert på hvor mange spillere som spiller spillet
 	 */
-	public void spillRunde() {
-		int runder = spillere.size();
-		for (int i = 0; i < runder; i++) {
-			for (Spiller s : spillere) {
+	public void spillRunde(int runde) {
+		int index = 0;
+		int nLike = runde - 3;
+		for (Spiller s : spillere) {
+			if (runde < 6) {
+				resultatBlokk.leggTilRundeRes(index, runde, regelBok.dyr(s.getBehold(), rundeNavn(runde)));
 				spillTrekk(s);
+				System.out.println(resultatBlokk.toString());
+			} else {
+				switch (runde) {
+				case 6 & 7:
+					if(regelBok.nLike(s.getBehold(),nLike)) {
+					resultatBlokk.leggTilRundeRes(index, runde, nLike);
+					}else {
+						resultatBlokk.leggTilRundeRes(index, runde, 0);
+					}
+					break;
+				case 8:
+					break;
+				case 9:
+					break;
+				case 10:
+					break;
+				case 11:
+					break;
+				case 12:
+					break;
+				}
 			}
+			index++;
 		}
-
 	}
 
 	/**
@@ -262,26 +288,26 @@ public class YatzooSpillet {
 
 	}
 
-	private String RundeNavn(int runde) {
+	private String rundeNavn(int runde) {
 		String rundeNavn = " ";
 		switch (runde) {
 		case 1:
-			rundeNavn = "antall like lover";
+			rundeNavn = "love";
 			break;
 		case 2:
-			rundeNavn = "antall like slanger";
+			rundeNavn = "slange";
 			break;
 		case 3:
-			rundeNavn = "antall like pandaer";
+			rundeNavn = "panda";
 			break;
 		case 4:
-			rundeNavn = "antall like griser";
+			rundeNavn = "gris";
 			break;
 		case 5:
-			rundeNavn = "antall like elefanter";
+			rundeNavn = "elefant";
 			break;
 		case 6:
-			rundeNavn = "antall like hvaler";
+			rundeNavn = "hval";
 			break;
 		case 7:
 			rundeNavn = "tre like";
