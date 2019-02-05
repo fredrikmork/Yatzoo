@@ -85,16 +85,19 @@ public class YatzooSpillet {
 					rundeStr = rundeNavn(runde);
 					JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
 					spillRunde(runde);
+					System.out.println(resultatBlokk.toString());
 				} else {
 					rundeStr = rundeNavn(runde);
 					antallSpillereTilInt = leggTilSpillereIAktivtSpill();
 					JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
 					spillRunde(runde);
+					System.out.println(resultatBlokk.toString());
 				}
 			} else {
 				rundeStr = rundeNavn(runde);
 				JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
 				spillRunde(runde);
+				System.out.println(resultatBlokk.toString());
 			}
 		}
 	}
@@ -233,9 +236,8 @@ public class YatzooSpillet {
 		int nLike = runde - 3;
 		for (Spiller s : spillere) {
 			if (runde < 6) {
-				resultatBlokk.leggTilRundeRes(index, runde, regelBok.dyr(s.getBehold(), rundeNavn(runde)));
 				spillTrekk(s);
-				System.out.println(resultatBlokk.toString());
+				resultatBlokk.leggTilRundeRes(index, runde, regelBok.dyr(s.getBehold(), rundeNavn(runde)));
 			} else {
 				switch (runde) {
 				case 6 & 7:
@@ -305,7 +307,7 @@ public class YatzooSpillet {
 
 	}
 
-	private String rundeNavn(int runde) {
+	public static String rundeNavn(int runde) {
 		String rundeNavn = " ";
 		switch (runde) {
 		case 1:
