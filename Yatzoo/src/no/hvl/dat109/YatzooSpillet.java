@@ -1,6 +1,7 @@
 package no.hvl.dat109;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JOptionPane;
 
@@ -74,27 +75,28 @@ public class YatzooSpillet {
 	 *            foregaar, har med å feilmeldinger aa gjore.
 	 */
 	public void startSpill(boolean newGame) {
-		int antallSpillereTilInt = 0;
 		String rundeStr = "";
-		for (int runde = 0; runde < 12; runde++) {
+		for (int runde = 1; runde < 12; runde++) {
 			if (runde == 1) {
+				int antallSpillereTilInt = 0;
 				if (newGame) {
 					JOptionPane.showMessageDialog(null, "new Game");
 					antallSpillereTilInt = leggTilSpillereIAktivtSpill();
-					rundeStr = RundeNavn(runde);
+					rundeStr = rundeNavn(runde);
 					JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
 					spillRunde();
 				} else {
+					rundeStr = rundeNavn(runde);
 					antallSpillereTilInt = leggTilSpillereIAktivtSpill();
-					for (int antallSpillere = 0; antallSpillere < antallSpillereTilInt; antallSpillere++) {
-						JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
-						spillRunde();
-					}
+					JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
+					spillRunde();
 				}
+			}else{
+			rundeStr = rundeNavn(runde);
+			JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
+			spillRunde();
 			}
 		}
-		JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
-		spillRunde();
 	}
 
 	/**
@@ -134,6 +136,10 @@ public class YatzooSpillet {
 			JOptionPane.showMessageDialog(null, "Resultat: " + trillet.toString());
 			// etter trillTerninger metoden er kalt vil kast variablen oke.
 			kast++;
+			if (kast == 3) {
+				leggTilSide(spiller, trillet, true);
+				continue;
+			}
 
 			leggTilSide(spiller, trillet, false);
 
@@ -143,9 +149,6 @@ public class YatzooSpillet {
 
 			if (spiller.getBehold().getAntallTerninger() == 5) {
 				fornoyd = true;
-				continue;
-			}
-			if (kast == 3) {
 				continue;
 			}
 		}
@@ -226,14 +229,10 @@ public class YatzooSpillet {
 	 * Spiller runder basert på hvor mange spillere som spiller spillet
 	 */
 	public void spillRunde() {
-		int runder = spillere.size();
-		for (int i = 0; i < runder; i++) {
 			for (Spiller s : spillere) {
 				spillTrekk(s);
 			}
 		}
-
-	}
 
 	/**
 	 * finner spillerene som vant ved hjelp av resultatBlokken
@@ -262,7 +261,7 @@ public class YatzooSpillet {
 
 	}
 
-	private String RundeNavn(int runde) {
+	private String rundeNavn(int runde) {
 		String rundeNavn = " ";
 		switch (runde) {
 		case 1:
