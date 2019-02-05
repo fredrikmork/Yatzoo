@@ -102,9 +102,11 @@ public class RegelBok {
 			antallLike = map.getOrDefault(terning.getDyr(),0);
 			if(antallLike >= 2) {
 				par++;
+				System.out.println("par: " + par);
 			}
 			
 		}
+		
 		return(par==2);
 	}
 
