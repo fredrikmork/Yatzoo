@@ -9,6 +9,9 @@ public class RegelBok {
 
 	private TerningSett terningene;
 
+	public RegelBok() {
+
+	}
 	/**
 	 * Poeng for et gitt dyr.
 	 * 
