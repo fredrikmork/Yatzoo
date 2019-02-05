@@ -12,6 +12,7 @@ public class RegelBok {
 	public RegelBok() {
 
 	}
+	
 	/**
 	 * Poeng for et gitt dyr.
 	 * 
