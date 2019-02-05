@@ -246,14 +246,31 @@ public class YatzooSpillet {
 					}
 					break;
 				case 8:
+					if(regelBok.toPar(s.getBehold())) {
+						resultatBlokk.leggTilRundeRes(index, runde, 4);
+					}else {
+						resultatBlokk.leggTilRundeRes(index, runde, 0);
+					}
 					break;
 				case 9:
+					if(regelBok.hus(s.getBehold())) {
+						resultatBlokk.leggTilRundeRes(index, runde, 5);
+					}else {
+						resultatBlokk.leggTilRundeRes(index, runde, 0);
+					}
 					break;
 				case 10:
+					if(regelBok.nLike(s.getBehold(), 5)) {
+						resultatBlokk.leggTilRundeRes(index, runde, 10);
+					}
 					break;
 				case 11:
+					if(regelBok.enAvHver(s.getBehold())== 1) {
+						resultatBlokk.leggTilRundeRes(index, runde, 5);
+					}
 					break;
 				case 12:
+					resultatBlokk.leggTilRundeRes(index, runde, resultatBlokk.visResultat()[index]);
 					break;
 				}
 			}
