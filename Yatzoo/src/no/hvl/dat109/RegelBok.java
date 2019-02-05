@@ -10,6 +10,7 @@ public class RegelBok {
 	public RegelBok() {
 
 	}
+	
 	/**
 	 * Poeng for et gitt dyr.
 	 * @param TerningSett terningene, String dyr
