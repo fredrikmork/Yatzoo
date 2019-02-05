@@ -97,13 +97,15 @@ public class RegelBok {
 
 		}
 		int par = 0;
+		int antallLike= 0;
 		for (Terning terning : terninger) {
-			int antallLike = map.getOrDefault(terning.getDyr(), 0);
-			if (antallLike >= 2) {
+			antallLike = map.getOrDefault(terning.getDyr(),0);
+			if(antallLike >= 2) {
 				par++;
 			}
+			
 		}
-		return (par == 2);
+		return(par==2);
 	}
 
 	/**
