@@ -1,8 +1,9 @@
 package no.hvl.dat109;
 
+import java.util.Comparator;
 import java.util.Random;
 
-public class Terning {
+public class Terning implements Comparator<Terning> {
 		
 		private String verdi;
 		
@@ -59,6 +60,10 @@ public class Terning {
 		 */
 		public void setDyr(String verdi) {
 			this.verdi = verdi;
+		}
+
+		public int compare(Terning t1, Terning t2) {
+			return t1.getDyr().compareTo(t2.getDyr());
 		}
 
 }

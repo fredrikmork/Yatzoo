@@ -12,7 +12,7 @@ public class RegelBok {
 	public RegelBok() {
 
 	}
-	
+
 	/**
 	 * Poeng for et gitt dyr.
 	 * 
@@ -52,32 +52,20 @@ public class RegelBok {
 		ArrayList<Terning> terningListe = terningene.getTerningSett();
 		int antall = 0;
 		String s = "";
-		terningListe.sort(Comparator(new Comparator<Terning>() {
-
-			@Override
-			public int compare(Terning t1, Terning t2) {
-				return t1.getDyr().compareTo(t2.getDyr());
-			}
-
-		}));
 		
+
 		for (int i = 0; i < terningListe.size(); i++) {
 			if (!terningListe.get(i).getDyr().equals(s)) {
 				s = terningListe.get(i).getDyr();
 				antall = 1;
-			}
-			else{
+			} else {
 				antall++;
 			}
-		
+
 		}
 		return (antall >= n);
 	}
 
-	private Comparator<? super Terning> Comparator(Comparator<Terning> comparator) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	/**
 	 * Sjekker terningsett listen om det er to par der, printer ut de parene
@@ -97,17 +85,17 @@ public class RegelBok {
 
 		}
 		int par = 0;
-		int antallLike= 0;
+		int antallLike = 0;
 		for (Terning terning : terninger) {
-			antallLike = map.getOrDefault(terning.getDyr(),0);
-			if(antallLike >= 2) {
+			antallLike = map.getOrDefault(terning.getDyr(), 0);
+			if (antallLike >= 2) {
 				par++;
 				System.out.println("par: " + par);
 			}
-			
+
 		}
-		
-		return(par==2);
+
+		return (par /2) ==  2;
 	}
 
 	/**

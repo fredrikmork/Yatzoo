@@ -37,10 +37,8 @@ class UnitTestRegler {
 	void testToPar() {
 		
 		for(int i = 0; i < ts.getTerningSett().size(); i++) {
-			if(i < 2) {
+			if(i < 3) {
 				ts.getTerningSett().get(i).setDyr("love");
-			} else if ( i < 4){
-				ts.getTerningSett().get(i).setDyr("slange");
 			} else {
 				ts.getTerningSett().get(i).setDyr("hval");
 			}
