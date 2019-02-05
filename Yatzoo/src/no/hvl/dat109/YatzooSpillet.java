@@ -84,17 +84,17 @@ public class YatzooSpillet {
 					antallSpillereTilInt = leggTilSpillereIAktivtSpill();
 					rundeStr = rundeNavn(runde);
 					JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
-					spillRunde();
+					spillRunde(runde);
 				} else {
 					rundeStr = rundeNavn(runde);
 					antallSpillereTilInt = leggTilSpillereIAktivtSpill();
 					JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
-					spillRunde();
+					spillRunde(runde);
 				}
-			}else{
-			rundeStr = rundeNavn(runde);
-			JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
-			spillRunde();
+			} else {
+				rundeStr = rundeNavn(runde);
+				JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
+				spillRunde(runde);
 			}
 		}
 	}
@@ -228,11 +228,38 @@ public class YatzooSpillet {
 	/**
 	 * Spiller runder basert på hvor mange spillere som spiller spillet
 	 */
-	public void spillRunde() {
-			for (Spiller s : spillere) {
+	public void spillRunde(int runde) {
+		int index = 0;
+		int nLike = runde - 3;
+		for (Spiller s : spillere) {
+			if (runde < 6) {
+				resultatBlokk.leggTilRundeRes(index, runde, regelBok.dyr(s.getBehold(), rundeNavn(runde)));
 				spillTrekk(s);
+				System.out.println(resultatBlokk.toString());
+			} else {
+				switch (runde) {
+				case 6 & 7:
+					if(regelBok.nLike(s.getBehold(),nLike)) {
+					resultatBlokk.leggTilRundeRes(index, runde, nLike);
+					}else {
+						resultatBlokk.leggTilRundeRes(index, runde, 0);
+					}
+					break;
+				case 8:
+					break;
+				case 9:
+					break;
+				case 10:
+					break;
+				case 11:
+					break;
+				case 12:
+					break;
+				}
 			}
+			index++;
 		}
+	}
 
 	/**
 	 * finner spillerene som vant ved hjelp av resultatBlokken
@@ -265,22 +292,22 @@ public class YatzooSpillet {
 		String rundeNavn = " ";
 		switch (runde) {
 		case 1:
-			rundeNavn = "antall like lover";
+			rundeNavn = "love";
 			break;
 		case 2:
-			rundeNavn = "antall like slanger";
+			rundeNavn = "slange";
 			break;
 		case 3:
-			rundeNavn = "antall like pandaer";
+			rundeNavn = "panda";
 			break;
 		case 4:
-			rundeNavn = "antall like griser";
+			rundeNavn = "gris";
 			break;
 		case 5:
-			rundeNavn = "antall like elefanter";
+			rundeNavn = "elefant";
 			break;
 		case 6:
-			rundeNavn = "antall like hvaler";
+			rundeNavn = "hval";
 			break;
 		case 7:
 			rundeNavn = "tre like";

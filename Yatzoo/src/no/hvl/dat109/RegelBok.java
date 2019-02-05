@@ -35,22 +35,21 @@ public class RegelBok {
 	 * @param int n antall like terninger
 	 * @return String, hvilket dyr som har n-like
 	 */
-	public String nLike(TerningSett terningene, int n) {
+	public boolean nLike(TerningSett terningene, int n) {
 		ArrayList<Terning> terningListe = terningene.getTerningSett();
-		String dyr = "";
+		int flestLike = 0;
 		for (int i = 0; i < terningListe.size(); i++) {
 			int sum = 0;
 			for (int j = i + 1; j < terningListe.size(); j++) {
 				if (terningListe.listIterator(i).equals(terningListe.listIterator(j))) {
 					sum += 1;
-					if (sum == n) {
-						dyr = terningListe.listIterator(i).toString();
-						
 					}
+				if(sum > flestLike) {
+					sum = flestLike;
 				}
-			}
+				}
 		}
-		return dyr;
+		return (flestLike == n);
 	}
 
 	/**
