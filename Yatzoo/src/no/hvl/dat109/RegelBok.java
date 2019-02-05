@@ -49,23 +49,24 @@ public class RegelBok {
 	 * @return boolean, om det stemmer for terningkastet
 	 */
 	public boolean nLike(TerningSett terningene, int n) {
-		ArrayList<Terning> terningListe = terningene.getTerningSett();
-		int antall = 0;
-		String s = "";
-		
-
-		for (int i = 0; i < terningListe.size(); i++) {
-			if (!terningListe.get(i).getDyr().equals(s)) {
-				s = terningListe.get(i).getDyr();
-				antall = 1;
-			} else {
-				antall++;
-			}
-
+		ArrayList<Terning> terninger = terningene.getTerningSett();
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		int i = 0;
+		for (Terning terning : terninger) {
+			i = map.getOrDefault(terning.getDyr(), 0);
+			i++;
+			map.put(terning.getDyr(), i);
 		}
-		return (antall >= n);
+		int antallLike = 0;
+		int hittilFlestLike = 0;
+		for (Terning terning : terninger) {
+			antallLike = map.getOrDefault(terning.getDyr(), 0);
+			if (hittilFlestLike == 0 || antallLike > hittilFlestLike) {
+				hittilFlestLike = antallLike;
+			}
+		}
+		return (hittilFlestLike >= n);
 	}
-
 
 	/**
 	 * Sjekker terningsett listen om det er to par der, printer ut de parene
@@ -95,7 +96,7 @@ public class RegelBok {
 
 		}
 
-		return (par /2) ==  2;
+		return (par / 2) == 2;
 	}
 
 	/**
