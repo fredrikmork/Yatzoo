@@ -9,9 +9,11 @@ import java.util.Arrays;
 public class ResultatBlokk {
 
 	private int[][] resultatTabell;
+//	int antallRunder = 0;
+//	int antallSpillere = 0;
 
 	public ResultatBlokk() {
-		resultatTabell = new int[4][13];
+		resultatTabell = new int[5][13];
 	}
 
 	/**
@@ -53,13 +55,10 @@ public class ResultatBlokk {
 		this.resultatTabell = resultatTabell;
 	}
 
-	@Override
-	public String toString() {
-		String tilString = "\tSpiller1| Spiller2| Spiller3| Spiller4| Spiller5|";
-		for(int i = 0; i < resultatTabell.length; i++) {
-			for(int j = 0; i < resultatTabell[i][0]; j++) {
-			tilString += "\n " + YatzooSpillet.rundeNavn(i) + ": " + resultatTabell[i][j];
-			}
+	public String toString(int runde) {
+		String tilString = "\tSpiller1|\tSpiller2|\tSpiller3|\tSpiller4|\tSpiller5| \n";
+		for(int row = 0; row < resultatTabell.length; row++) {
+			tilString += "\t" + resultatTabell[row][runde] + "\t";
 		}
 		return tilString;
 	}

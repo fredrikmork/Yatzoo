@@ -60,7 +60,7 @@ public class YatzooSpillet {
 			String melding = "skriv spiller" + spillerNummer + " sitt navn";
 			String SpillerNavnInput = JOptionPane.showInputDialog(null, melding);
 			Spiller spiller = new Spiller(SpillerNavnInput);
-			this.leggTilSpiller(spiller);
+			leggTilSpiller(spiller);
 		}
 		return antallSpillereTilInt;
 	}
@@ -85,19 +85,22 @@ public class YatzooSpillet {
 					rundeStr = rundeNavn(runde);
 					JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
 					spillRunde(runde);
-					System.out.println(resultatBlokk.toString());
+					System.out.print(rundeNavn(runde));
+					System.out.println(resultatBlokk.toString(runde));
 				} else {
 					rundeStr = rundeNavn(runde);
 					antallSpillereTilInt = leggTilSpillereIAktivtSpill();
 					JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
 					spillRunde(runde);
-					System.out.println(resultatBlokk.toString());
+					System.out.print(rundeNavn(runde));
+					System.out.println(resultatBlokk.toString(runde));
 				}
 			} else {
 				rundeStr = rundeNavn(runde);
 				JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
 				spillRunde(runde);
-				System.out.println(resultatBlokk.toString());
+				System.out.print(rundeNavn(runde));
+				System.out.println(resultatBlokk.toString(runde));
 			}
 		}
 	}
@@ -191,9 +194,19 @@ public class YatzooSpillet {
 			spiller.getBehold().leggTilTerning(trillet.getTerningSett().get(0));
 			return;
 		}
+		boolean riktigInput = false;
+		String beholde = "";
+		while (!riktigInput) {
+			try {
+				beholde = JOptionPane.showInputDialog(null,
+						"skriv inn tallet paa terningene " + "du vil beholde" + trillet.toString());
+				Integer.parseInt(beholde);
+				riktigInput = true;
+			} catch (NumberFormatException e) {
+				continue;
+			}
+		}
 
-		String beholde = JOptionPane.showInputDialog(null,
-				"skriv inn tallet paa terningene " + "du vil beholde" + trillet.toString());
 		// hvis det ikke staar noe i input fielden vil ingen terninger bli lagt til i
 		// spillerens behold Terningsett og metoden vil returnere og ikke kjore videre.
 		if (beholde.isEmpty() || beholde.equals("")) {
@@ -234,40 +247,43 @@ public class YatzooSpillet {
 	public void spillRunde(int runde) {
 		int index = 0;
 		int nLike = runde - 3;
-		for (Spiller s : spillere) {
+		for (Spiller s : this.spillere) {
+			if (s == null) {
+				continue;
+			}
 			if (runde < 6) {
 				spillTrekk(s);
-				resultatBlokk.leggTilRundeRes(index, runde, regelBok.dyr(s.getBehold(), rundeNavn(runde)));
+				resultatBlokk.leggTilRundeRes(index, runde, (regelBok.dyr(s.getBehold(), rundeNavn(runde))));
 			} else {
 				switch (runde) {
 				case 6 & 7:
-					if(regelBok.nLike(s.getBehold(),nLike)) {
-					resultatBlokk.leggTilRundeRes(index, runde, nLike);
-					}else {
+					if (regelBok.nLike(s.getBehold(), nLike)) {
+						resultatBlokk.leggTilRundeRes(index, runde, nLike);
+					} else {
 						resultatBlokk.leggTilRundeRes(index, runde, 0);
 					}
 					break;
 				case 8:
-					if(regelBok.toPar(s.getBehold())) {
+					if (regelBok.toPar(s.getBehold())) {
 						resultatBlokk.leggTilRundeRes(index, runde, 4);
-					}else {
+					} else {
 						resultatBlokk.leggTilRundeRes(index, runde, 0);
 					}
 					break;
 				case 9:
-					if(regelBok.hus(s.getBehold())) {
+					if (regelBok.hus(s.getBehold())) {
 						resultatBlokk.leggTilRundeRes(index, runde, 5);
-					}else {
+					} else {
 						resultatBlokk.leggTilRundeRes(index, runde, 0);
 					}
 					break;
 				case 10:
-					if(regelBok.nLike(s.getBehold(), 5)) {
+					if (regelBok.nLike(s.getBehold(), 5)) {
 						resultatBlokk.leggTilRundeRes(index, runde, 10);
 					}
 					break;
 				case 11:
-					if(regelBok.enAvHver(s.getBehold())== 1) {
+					if (regelBok.enAvHver(s.getBehold()) == 1) {
 						resultatBlokk.leggTilRundeRes(index, runde, 5);
 					}
 					break;
