@@ -70,10 +70,8 @@ public class RegelBok {
 
 	/**
 	 * Sjekker terningsett listen om det er to par der, printer ut de parene
-	 * 
-	 * @param TerningSett
-	 *            terningene
-	 * @return
+	 * @param TerningSett terningene
+	 * @return boolean om det finnes to unike par i terningSettet.
 	 */
 	public boolean toPar(TerningSett terningene) {
 		ArrayList<Terning> terninger = terningene.getTerningSett();
@@ -99,11 +97,9 @@ public class RegelBok {
 	}
 
 	/**
-	 * Et par og 3 like i et terningsett
-	 * 
-	 * @param TerningSett
-	 *            terningene.
-	 * @return dyrene det gjelder for
+	 * Et par og 3 like i et terningsett 
+	 * @param TerningSett: terningene.
+	 * @return boolean om det stemmer for det gitte terningSettet.
 	 */
 	public boolean hus(TerningSett terningene) {
 		ArrayList<Terning> terninger = terningene.getTerningSett();

@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.JOptionPane;
-
+/**
+ * 
+ * @author Perminow
+ *
+ */
 public class YatzooSpillet {
 	private static final int MAXTERNINGER = 5;
 	private ArrayList<Spiller> spillere;
@@ -14,6 +18,7 @@ public class YatzooSpillet {
 
 	/**
 	 * standar konstruktor
+	 * opretter et nytt YatzooSpill objekt.
 	 */
 	public YatzooSpillet() {
 		spillere = new ArrayList<Spiller>();
@@ -62,8 +67,7 @@ public class YatzooSpillet {
 		// iterere gjennon alle spillere som spiller i spillet og hver spiller
 		// skriver sitt spillernavn
 		for (int antallSpillere = 0; antallSpillere < antallSpillereTilInt; antallSpillere++) {
-			int spillerNummer = antallSpillere + 1;
-			String melding = "skriv spiller" + spillerNummer + " sitt navn";
+			String melding = "skriv spiller" + (antallSpillere + 1) + " sitt navn";
 			String SpillerNavnInput = JOptionPane.showInputDialog(null, melding);
 			Spiller spiller = new Spiller(SpillerNavnInput);
 			leggTilSpiller(spiller);

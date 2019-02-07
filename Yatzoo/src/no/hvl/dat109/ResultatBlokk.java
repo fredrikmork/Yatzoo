@@ -9,13 +9,15 @@ import java.util.Arrays;
 public class ResultatBlokk {
 
 	private int[][] resultatTabell;
-	// int antallRunder = 0;
-	// int antallSpillere = 0;
-
+	
 	public ResultatBlokk() {
 		resultatTabell = new int[5][13];
 	}
-
+	/**
+	 * gaar igjennom resultatTabellen og summerer totalpoengene for hver spiller 
+	 * og putter dem nederst i tabellen slik at man kan se hvor mye poeng hver spiller har faatt.¨
+	 * brukes videre til aa finne vinner i finnVinner metoden i YatzooSpillet.
+	 */
 	public void totalResultat() {
 		int sum = 0;
 		for (int row = 0; row < resultatTabell.length; row++) {
@@ -33,30 +35,15 @@ public class ResultatBlokk {
 	public void leggTilSpiller(int spiller) {
 		resultatTabell[spiller][0] = spiller;
 	}
-
+	/**
+	 * legger til et resultat fra en runde inn i resultatTabellen.
+	 * @param spiller, int spiller. indexen til spilleren som faar poeng
+	 * @param runde, int runde hvilke runde det gjelder
+	 * @param res, int res: resultatet som spilleren skal ha paa gitt runde.
+	 */
 	public void leggTilRundeRes(int spiller, int runde, int res) {
 		resultatTabell[spiller][runde] = res;
 	}
-
-//	public int visResultat() {
-//
-//		int[] spillerOgResultat;
-//		int spiller = 0;
-//		int resultat = 0;
-//		int hittilStorst = 0;
-//		for (int i = 0; i < resultatTabell[0].length; i++) {
-//			resultat = resultatTabell[i][13];
-//			if (hittilStorst == 0 || resultat > hittilStorst) {
-//				hittilStorst = resultat;
-//				spiller = i;
-//			}
-//		}
-//		spillerOgResultat = new int[2];
-//		spillerOgResultat[0] = spiller;
-//		spillerOgResultat[1] = resultat;
-//		return resultat;
-//
-//	}
 
 	public int[][] getResultatTabell() {
 		return resultatTabell;
@@ -65,7 +52,13 @@ public class ResultatBlokk {
 	public void setResultatTabell(int[][] resultatTabell) {
 		this.resultatTabell = resultatTabell;
 	}
-
+	/**
+	 * toString metode som omgjør en spesifikk rad i tabellen
+	 * til en string med en 
+	 * en oversiktlig form for aa vise resultater.
+	 * @param runde hvilke runde som det gjelder
+	 * @return String, den stringen som blir skapt av metoden.
+	 */
 	public String toString(int runde) {
 		String tilString = "";
 		for (int row = 0; row < resultatTabell.length; row++) {

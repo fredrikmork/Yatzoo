@@ -1,7 +1,11 @@
 package no.hvl.dat109;
 
 import java.util.ArrayList;
-
+/**
+ * 
+ * @author Perminow
+ *
+ */
 public class Spiller {
 	
 	private String navn;

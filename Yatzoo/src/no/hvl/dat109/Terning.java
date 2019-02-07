@@ -1,20 +1,27 @@
 package no.hvl.dat109;
 
-import java.util.Comparator;
 import java.util.Random;
-
+/**
+ * 
+ * @author Perminow
+ *
+ */
 public class Terning {
 		
 		private String verdi;
-		
+		/**
+		 * tom konstruktor
+		 */
 		public Terning() {
 			verdi="";
 		}
 		
 		/**
 		 * 
-		 * triller terning og setter verdien av trillingen til den 
-		 * terninger som ble trillet til det resultatet av trillingen ble :S
+		 *regner ut paa bakgrunn av et tilfeldig tall
+		 *hva resultatet av et terningkast blir.
+		 *Deretter settes resultatet til verdien terningen vister.
+		 *bruker Java.Util.Random for tilfeldig tall.
 		 * 
 		 */
 		public void resultat() {

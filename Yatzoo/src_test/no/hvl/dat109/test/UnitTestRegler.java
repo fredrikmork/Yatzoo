@@ -8,7 +8,11 @@ import org.junit.jupiter.api.Test;
 import no.hvl.dat109.RegelBok;
 import no.hvl.dat109.Terning;
 import no.hvl.dat109.TerningSett;
-
+/**
+ * 
+ * @author Fredrik
+ *
+ */
 class UnitTestRegler {
 	private TerningSett ts = new TerningSett(5);
 	private RegelBok regler = new RegelBok();
