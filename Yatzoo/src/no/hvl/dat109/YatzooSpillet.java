@@ -263,11 +263,10 @@ public class YatzooSpillet {
 
 	/**
 	 * Spiller runder basert på hvor mange spillere som spiller spillet
+	 * 
 	 */
 	public void spillRunde(int runde) {
 		int index = 0;
-		int nLike = runde - 4;
-		int tabellIndexRunde = runde -1;
 		for (Spiller s : this.spillere) {
 			if (s == null) {
 				continue;
@@ -275,53 +274,70 @@ public class YatzooSpillet {
 			if(runde != 13) {
 			spillTrekk(s);
 			}
-			if (runde < 7) {
-				resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, (regelBok.dyr(s.getBehold(), rundeNavn(runde))));
-			} else {
-				switch (runde) {
-				case 7:
-					if (regelBok.nLike(s.getBehold(), nLike)) {
-						resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, nLike);
-					} else {
-						resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, 0);
-					}
-					break;
-				case 8:
-					if(regelBok.nLike(s.getBehold(), nLike)) {
-						resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, nLike);
-					}else {
-						resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, 0);
-					}
-					break;
-				case 9:
-					if (regelBok.toPar(s.getBehold())) {
-						resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, 4);
-					} else {
-						resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, 0);
-					}
-					break;
-				case 10:
-					if (regelBok.hus(s.getBehold())) {
-						resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, 5);
-					} else {
-						resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, 0);
-					}
-					break;
-				case 11:
-					if (regelBok.enAvHver(s.getBehold()) == 1) {
-						resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, 5);
-					}
-					break;
-				case 12:
-					if (regelBok.nLike(s.getBehold(), 5)) {
-						resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, 10);
-					}
-					break;
-				case 13:
-					break;
-				}
-			}
+			giPoeng(s,runde,index);
 			index++;
+		}
+	}
+	/**
+	 * finner ut hvor mye poeng en spiller skal få etter en runde er gjennomført
+	 * og så gir denne spilleren riktig mengde poeng, og legger disse poengene
+	 * inn i spilleren si kolonne i resultatTabellen til YatzooSpillet.
+	 * @param s, Spiller s, den spilleren som skal faa poeng
+	 * @param runde, int runde hvilke runde vi er paa
+	 * @param index int index, spilleren sin index i resultatTabellen
+	 */
+	public void giPoeng(Spiller s,int runde, int index) {
+		//naar vi skal sjekke nLike bruker jeg (runde - 4) siden det er felles for baade 3 like og 4 like
+		//naar runde er 7 som er 3 like vil poeng vaere 3 og antall like vaere 3 samme for runde 8.
+		//da er nLike 4.
+		int nLike = runde - 4;
+		//maa trekke fra en paa runde siden runde starter paa 1 og resultattabellen starter paa 0.
+		int tabellIndexRunde = runde -1;
+		if (runde < 7) {
+			resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, (regelBok.dyr(s.getBehold(), rundeNavn(runde))));
+		} else {
+			switch (runde) {
+			case 7:
+				if (regelBok.nLike(s.getBehold(), nLike)) {
+					resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, nLike);
+				} else {
+					resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, 0);
+				}
+				break;
+			case 8:
+				if(regelBok.nLike(s.getBehold(), nLike)) {
+					resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, nLike);
+				}else {
+					resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, 0);
+				}
+				break;
+			case 9:
+				if (regelBok.toPar(s.getBehold())) {
+					resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, 4);
+				} else {
+					resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, 0);
+				}
+				break;
+			case 10:
+				if (regelBok.hus(s.getBehold())) {
+					resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, 5);
+				} else {
+					resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, 0);
+				}
+				break;
+			case 11:
+				if (regelBok.enAvHver(s.getBehold()) == 1) {
+					resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, 5);
+				}
+				break;
+			case 12:
+				if (regelBok.nLike(s.getBehold(), 5)) {
+					resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, 10);
+				}
+				break;
+			case 13:
+				break;
+			}
 		}
 	}
 
