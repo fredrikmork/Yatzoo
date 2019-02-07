@@ -105,6 +105,10 @@ public class YatzooSpillet {
 				JOptionPane.showMessageDialog(null,
 						"Viser naa: " + rundeStr);
 				resultatBlokk.totalResultat();
+				System.out.print(rundeNavn(runde));
+				System.out.println(resultatBlokk.toString(runde));
+				System.out.println("vinneren er: " + spillerVant().getNavn() + "!!!!!!!!!");
+				return;
 				}
 				System.out.print(rundeNavn(runde));
 				System.out.println(resultatBlokk.toString(runde));
@@ -257,6 +261,7 @@ public class YatzooSpillet {
 	public void spillRunde(int runde) {
 		int index = 0;
 		int nLike = runde - 4;
+		int tabellIndexRunde = runde -1;
 		for (Spiller s : this.spillere) {
 			if (s == null) {
 				continue;
@@ -265,45 +270,45 @@ public class YatzooSpillet {
 			spillTrekk(s);
 			}
 			if (runde < 7) {
-				resultatBlokk.leggTilRundeRes(index, runde, (regelBok.dyr(s.getBehold(), rundeNavn(runde))));
+				resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, (regelBok.dyr(s.getBehold(), rundeNavn(runde))));
 			} else {
 				switch (runde) {
 				case 7:
 					if (regelBok.nLike(s.getBehold(), nLike)) {
-						resultatBlokk.leggTilRundeRes(index, runde, nLike);
+						resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, nLike);
 					} else {
-						resultatBlokk.leggTilRundeRes(index, runde, 0);
+						resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, 0);
 					}
 					break;
 				case 8:
 					if(regelBok.nLike(s.getBehold(), nLike)) {
-						resultatBlokk.leggTilRundeRes(index, runde, nLike);
+						resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, nLike);
 					}else {
-						resultatBlokk.leggTilRundeRes(index, runde, 0);
+						resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, 0);
 					}
 					break;
 				case 9:
 					if (regelBok.toPar(s.getBehold())) {
-						resultatBlokk.leggTilRundeRes(index, runde, 4);
+						resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, 4);
 					} else {
-						resultatBlokk.leggTilRundeRes(index, runde, 0);
+						resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, 0);
 					}
 					break;
 				case 10:
 					if (regelBok.hus(s.getBehold())) {
-						resultatBlokk.leggTilRundeRes(index, runde, 5);
+						resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, 5);
 					} else {
-						resultatBlokk.leggTilRundeRes(index, runde, 0);
+						resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, 0);
 					}
 					break;
 				case 11:
 					if (regelBok.enAvHver(s.getBehold()) == 1) {
-						resultatBlokk.leggTilRundeRes(index, runde, 5);
+						resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, 5);
 					}
 					break;
 				case 12:
 					if (regelBok.nLike(s.getBehold(), 5)) {
-						resultatBlokk.leggTilRundeRes(index, runde, 10);
+						resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, 10);
 					}
 					break;
 				case 13:
@@ -320,24 +325,18 @@ public class YatzooSpillet {
 	 * @return Spiller: spilleren som vant
 	 */
 	public Spiller spillerVant() {
-		Spiller vinner = null;
-//		int[] resultat = (resultatBlokk.visResultat());
-//		if (resultater[0] == 1) {
-//			vinner = spillere.get(0);
-//		}
-//		if (resultater[0] == 2) {
-//			vinner = spillere.get(1);
-//		}
-//		if (resultater[0] == 3) {
-//			vinner = spillere.get(2);
-//		}
-//		if (resultater[0] == 4) {
-//			vinner = spillere.get(3);
-//		} else {
-//			vinner = spillere.get(4);
-//		}
-
-		return vinner;
+		Spiller spiller =null;
+		int score = 0;
+		int hittilStorst = 0;
+		for(Spiller s: spillere) {
+			score = resultatBlokk.getResultatTabell()[spillere.indexOf(s)][12];
+			if(hittilStorst == 0 || score > hittilStorst) {
+			hittilStorst = score;
+			spiller = s;
+			}
+		}
+		
+		return spiller;
 
 	}
 
