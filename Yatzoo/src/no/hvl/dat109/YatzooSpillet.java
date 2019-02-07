@@ -361,7 +361,11 @@ public class YatzooSpillet {
 		return spiller;
 
 	}
-
+	/**
+	 * metode for aa finne ut hvilke runde i integer som hoerer til hvilket rundenavn 
+	 * @param runde, int runde nummer
+	 * @return String navnet paa runden som er gitt i parameteret.
+	 */
 	public static String rundeNavn(int runde) {
 		String rundeNavn = " ";
 		switch (runde) {
