@@ -68,6 +68,11 @@ class UnitTestRegler {
 		assertTrue(regler.hus(ts));
 	}
 	
+	@Test
+	void testUlike() {
+		//TODO: finne ut om Ulike funker
+	}
+	
 	
 
 }
