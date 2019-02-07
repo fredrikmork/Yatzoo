@@ -98,9 +98,13 @@ public class YatzooSpillet {
 				}
 			} else {
 				rundeStr = rundeNavn(runde);
-				JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
 				if(runde != 13) {
+				JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
 				spillRunde(runde);
+				}else {
+				JOptionPane.showMessageDialog(null,
+						"Viser naa: " + rundeStr);
+				resultatBlokk.totalResultat();
 				}
 				System.out.print(rundeNavn(runde));
 				System.out.println(resultatBlokk.toString(runde));
@@ -303,7 +307,6 @@ public class YatzooSpillet {
 					}
 					break;
 				case 13:
-					resultatBlokk.leggTilRundeRes(index, runde, resultatBlokk.visResultat());
 					break;
 				}
 			}
@@ -378,7 +381,7 @@ public class YatzooSpillet {
 			rundeNavn = "YATZOO";
 			break;
 		case 13:
-			rundeNavn = "TotalRes:";
+			rundeNavn = "Result:";
 		}
 		return rundeNavn;
 	}
