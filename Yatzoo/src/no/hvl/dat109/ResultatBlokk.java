@@ -13,7 +13,7 @@ public class ResultatBlokk {
 //	int antallSpillere = 0;
 
 	public ResultatBlokk() {
-		resultatTabell = new int[5][13];
+		resultatTabell = new int[5][14];
 	}
 
 	/**
@@ -27,7 +27,7 @@ public class ResultatBlokk {
 		resultatTabell[spiller][runde] = res;
 	}
 
-	public int[] visResultat() {
+	public int visResultat() {
 
 		int[] spillerOgResultat;
 		int spiller = 0;
@@ -43,7 +43,7 @@ public class ResultatBlokk {
 		spillerOgResultat = new int[2];
 		spillerOgResultat[0] = spiller;
 		spillerOgResultat[1] = resultat;
-		return spillerOgResultat;
+		return resultat;
 
 	}
 
@@ -56,9 +56,9 @@ public class ResultatBlokk {
 	}
 
 	public String toString(int runde) {
-		String tilString = "\tSpiller1|\tSpiller2|\tSpiller3|\tSpiller4|\tSpiller5| \n";
+		String tilString = "";
 		for(int row = 0; row < resultatTabell.length; row++) {
-			tilString += "\t" + resultatTabell[row][runde] + "\t";
+			tilString += "\t\t" + resultatTabell[row][runde] + "\t";
 		}
 		return tilString;
 	}

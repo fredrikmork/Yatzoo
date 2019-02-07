@@ -6,7 +6,6 @@ public class Spiller {
 	
 	private String navn;
 	private TerningSett behold;
-	private boolean valgtAaTrille = false;
 	
 	
 	/**
@@ -75,22 +74,7 @@ public class Spiller {
 		return behold;
 	}
 	
-	/**
-	 * is metode for boolean valgt aa trille
-	 * @return boolean om spiller har valgt a trille
-	 */
-	public boolean isValgtAaTrille() {
-		return valgtAaTrille;
-	}
 	
-	/**
-	 * set metode for boolean valgt aa trille 
-	 * setter om spiller har valgt aa trille eller ikke
-	 * @param valgtAaTrille boolean
-	 */
-	public void setValgtAaTrille(boolean valgtAaTrille) {
-		this.valgtAaTrille = valgtAaTrille;
-	}
 
 	
 

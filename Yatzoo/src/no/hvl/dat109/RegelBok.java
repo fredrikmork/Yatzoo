@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 public class RegelBok {
 
-	private TerningSett terningene;
+	
 
 	public RegelBok() {
 
@@ -91,7 +91,6 @@ public class RegelBok {
 			antallLike = map.getOrDefault(terning.getDyr(), 0);
 			if (antallLike >= 2) {
 				par++;
-				System.out.println("par: " + par);
 			}
 
 		}

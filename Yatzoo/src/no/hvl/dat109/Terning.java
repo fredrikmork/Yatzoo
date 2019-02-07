@@ -3,7 +3,7 @@ package no.hvl.dat109;
 import java.util.Comparator;
 import java.util.Random;
 
-public class Terning implements Comparator<Terning> {
+public class Terning {
 		
 		private String verdi;
 		
@@ -21,7 +21,7 @@ public class Terning implements Comparator<Terning> {
 			int tall;
 			String resultat = "";
 			Random random = new Random();
-			tall = (random.nextInt(5));
+			tall = (random.nextInt(6));
 			switch(tall){
 			
 			case 0:
@@ -42,6 +42,9 @@ public class Terning implements Comparator<Terning> {
 			case 5:
 				resultat="hval";
 				break;
+			default:
+				resultat= "feil";
+				break;
 			
 			}
 			setDyr(resultat);
@@ -61,9 +64,4 @@ public class Terning implements Comparator<Terning> {
 		public void setDyr(String verdi) {
 			this.verdi = verdi;
 		}
-
-		public int compare(Terning t1, Terning t2) {
-			return t1.getDyr().compareTo(t2.getDyr());
-		}
-
 }

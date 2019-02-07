@@ -25,12 +25,21 @@ class UnitTestRegler {
 	
 	@Test
 	void testNLike() {
+		int i= 0;
 		for(Terning t: ts.getTerningSett()) {
+			if(i<3) {
 			t.setDyr("love");
+			}else if(i==3){
+				t.setDyr("hval");
+			}
+			else{
+				t.setDyr("love");
+			}
+			i++;
 		}
 		assertTrue(regler.nLike(ts, 3));
 		assertTrue(regler.nLike(ts, 4));
-		assertTrue(regler.nLike(ts, 5));
+		assertFalse(regler.nLike(ts, 5));
 	}
 	
 	@Test

@@ -76,11 +76,12 @@ public class YatzooSpillet {
 	 */
 	public void startSpill(boolean newGame) {
 		String rundeStr = "";
-		for (int runde = 1; runde < 12; runde++) {
+		for (int runde = 1; runde < 14; runde++) {
 			if (runde == 1) {
 				int antallSpillereTilInt = 0;
 				if (newGame) {
 					JOptionPane.showMessageDialog(null, "new Game");
+					System.out.println("\t\tSpiller1|\t\tSpiller2|\t\tSpiller3|\t\tSpiller4|\t\tSpiller5| \n");
 					antallSpillereTilInt = leggTilSpillereIAktivtSpill();
 					rundeStr = rundeNavn(runde);
 					JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
@@ -98,7 +99,9 @@ public class YatzooSpillet {
 			} else {
 				rundeStr = rundeNavn(runde);
 				JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
+				if(runde != 13) {
 				spillRunde(runde);
+				}
 				System.out.print(rundeNavn(runde));
 				System.out.println(resultatBlokk.toString(runde));
 			}
@@ -200,6 +203,9 @@ public class YatzooSpillet {
 			try {
 				beholde = JOptionPane.showInputDialog(null,
 						"skriv inn tallet paa terningene " + "du vil beholde" + trillet.toString());
+				if (beholde.equals("")) {
+					riktigInput = true;
+				}
 				Integer.parseInt(beholde);
 				riktigInput = true;
 			} catch (NumberFormatException e) {
@@ -209,9 +215,6 @@ public class YatzooSpillet {
 
 		// hvis det ikke staar noe i input fielden vil ingen terninger bli lagt til i
 		// spillerens behold Terningsett og metoden vil returnere og ikke kjore videre.
-		if (beholde.isEmpty() || beholde.equals("")) {
-			return;
-		}
 		// splitter inputstringen til en liste med hver enkelt karakter slik at det blir
 		// mulig aa gaa gjennom alle tallene spilleren skrev den ville beholde.
 		String[] beholdeArray = beholde.split("");
@@ -220,6 +223,9 @@ public class YatzooSpillet {
 		// hvilke terning som spilleren ville beholde, slik at man sjekker det for hver
 		// terning.
 		for (int i = 0; i < beholdeArray.length; i++) {
+			if (beholde.isEmpty() || beholde.equals("")) {
+				continue;
+			}
 			int tallet = Integer.parseInt(beholdeArray[i]);
 			switch (tallet) {
 			case 1:
@@ -246,17 +252,19 @@ public class YatzooSpillet {
 	 */
 	public void spillRunde(int runde) {
 		int index = 0;
-		int nLike = runde - 3;
+		int nLike = runde - 4;
 		for (Spiller s : this.spillere) {
 			if (s == null) {
 				continue;
 			}
-			if (runde < 6) {
-				spillTrekk(s);
+			if(runde != 13) {
+			spillTrekk(s);
+			}
+			if (runde < 7) {
 				resultatBlokk.leggTilRundeRes(index, runde, (regelBok.dyr(s.getBehold(), rundeNavn(runde))));
 			} else {
 				switch (runde) {
-				case 6 & 7:
+				case 7:
 					if (regelBok.nLike(s.getBehold(), nLike)) {
 						resultatBlokk.leggTilRundeRes(index, runde, nLike);
 					} else {
@@ -264,22 +272,24 @@ public class YatzooSpillet {
 					}
 					break;
 				case 8:
+					if(regelBok.nLike(s.getBehold(), nLike)) {
+						resultatBlokk.leggTilRundeRes(index, runde, nLike);
+					}else {
+						resultatBlokk.leggTilRundeRes(index, runde, 0);
+					}
+					break;
+				case 9:
 					if (regelBok.toPar(s.getBehold())) {
 						resultatBlokk.leggTilRundeRes(index, runde, 4);
 					} else {
 						resultatBlokk.leggTilRundeRes(index, runde, 0);
 					}
 					break;
-				case 9:
+				case 10:
 					if (regelBok.hus(s.getBehold())) {
 						resultatBlokk.leggTilRundeRes(index, runde, 5);
 					} else {
 						resultatBlokk.leggTilRundeRes(index, runde, 0);
-					}
-					break;
-				case 10:
-					if (regelBok.nLike(s.getBehold(), 5)) {
-						resultatBlokk.leggTilRundeRes(index, runde, 10);
 					}
 					break;
 				case 11:
@@ -288,7 +298,12 @@ public class YatzooSpillet {
 					}
 					break;
 				case 12:
-					resultatBlokk.leggTilRundeRes(index, runde, resultatBlokk.visResultat()[index]);
+					if (regelBok.nLike(s.getBehold(), 5)) {
+						resultatBlokk.leggTilRundeRes(index, runde, 10);
+					}
+					break;
+				case 13:
+					resultatBlokk.leggTilRundeRes(index, runde, resultatBlokk.visResultat());
 					break;
 				}
 			}
@@ -302,22 +317,22 @@ public class YatzooSpillet {
 	 * @return Spiller: spilleren som vant
 	 */
 	public Spiller spillerVant() {
-		Spiller vinner;
-		int[] resultater = (resultatBlokk.visResultat());
-		if (resultater[0] == 1) {
-			vinner = spillere.get(0);
-		}
-		if (resultater[0] == 2) {
-			vinner = spillere.get(1);
-		}
-		if (resultater[0] == 3) {
-			vinner = spillere.get(2);
-		}
-		if (resultater[0] == 4) {
-			vinner = spillere.get(3);
-		} else {
-			vinner = spillere.get(4);
-		}
+		Spiller vinner = null;
+//		int[] resultat = (resultatBlokk.visResultat());
+//		if (resultater[0] == 1) {
+//			vinner = spillere.get(0);
+//		}
+//		if (resultater[0] == 2) {
+//			vinner = spillere.get(1);
+//		}
+//		if (resultater[0] == 3) {
+//			vinner = spillere.get(2);
+//		}
+//		if (resultater[0] == 4) {
+//			vinner = spillere.get(3);
+//		} else {
+//			vinner = spillere.get(4);
+//		}
 
 		return vinner;
 
@@ -345,23 +360,25 @@ public class YatzooSpillet {
 			rundeNavn = "hval";
 			break;
 		case 7:
-			rundeNavn = "tre like";
+			rundeNavn = "3like";
 			break;
 		case 8:
-			rundeNavn = "fire like";
+			rundeNavn = "4like";
 			break;
 		case 9:
-			rundeNavn = "to par";
+			rundeNavn = "par ";
 			break;
 		case 10:
-			rundeNavn = "hus (par og tre like)";
+			rundeNavn = "hus ";
 			break;
 		case 11:
-			rundeNavn = "alle ulike";
+			rundeNavn = "ulike";
 			break;
 		case 12:
 			rundeNavn = "YATZOO";
 			break;
+		case 13:
+			rundeNavn = "TotalRes:";
 		}
 		return rundeNavn;
 	}
