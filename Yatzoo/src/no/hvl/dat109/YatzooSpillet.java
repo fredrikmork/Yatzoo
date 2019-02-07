@@ -31,7 +31,13 @@ public class YatzooSpillet {
 	public void leggTilSpiller(Spiller spiller) {
 		spillere.add(spiller);
 	}
-
+	/**
+	 * ber spillere skrive inn hvor mange 
+	 * spillere som skal spille spillet.
+	 * Og for hver spiller ber spille spillerene skrive inn 
+	 * navnet sitt.
+	 * @return int antall spillere i aktivt spill.
+	 */
 	public int leggTilSpillereIAktivtSpill() {
 		boolean rettInput = false;
 		int antallSpillereTilInt = 0;
