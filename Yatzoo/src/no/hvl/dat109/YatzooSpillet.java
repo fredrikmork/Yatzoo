@@ -52,9 +52,13 @@ public class YatzooSpillet {
 				String inputAntallSpillere = JOptionPane.showInputDialog(null, "antall spilere(maks 5): ");
 				if(inputAntallSpillere.equals("null")) {
 					int result = JOptionPane.showConfirmDialog(null,
-							"Sikker på at du vil avslutte?",
+							"Sikker paa at du vil avslutte?",
 							"Bekreft avslutt", JOptionPane.YES_NO_CANCEL_OPTION);
-					if (result == JOptionPane.YES_OPTION) System.exit(0);
+					if (result == JOptionPane.YES_OPTION) {
+						System.exit(0);
+					}else {
+						continue;
+					}
 				}
 				antallSpillereTilInt = Integer.parseInt(inputAntallSpillere);
 				if (antallSpillereTilInt > 5) {
@@ -72,9 +76,13 @@ public class YatzooSpillet {
 			startSpill(false);
 		} catch (NullPointerException np) {
 			int result = JOptionPane.showConfirmDialog(null,
-					"Sikker på at du vil avslutte?",
+					"Sikker paa at du vil avslutte?",
 					"Bekreft avslutt", JOptionPane.YES_NO_CANCEL_OPTION);
-			if (result == JOptionPane.YES_OPTION) System.exit(0);
+			if (result == JOptionPane.YES_OPTION) {
+				System.exit(0);
+			}else {
+				leggTilSpillereIAktivtSpill();
+			}
 		}
 		// iterere gjennon alle spillere som spiller i spillet og hver spiller
 		// skriver sitt spillernavn
