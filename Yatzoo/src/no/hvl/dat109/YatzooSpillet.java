@@ -50,6 +50,12 @@ public class YatzooSpillet {
 		try {
 			while (!rettInput) {
 				String inputAntallSpillere = JOptionPane.showInputDialog(null, "antall spilere(maks 5): ");
+				if(inputAntallSpillere.equals("null")) {
+					int result = JOptionPane.showConfirmDialog(null,
+							"Sikker pÃ¥ at du vil avslutte?",
+							"Bekreft avslutt", JOptionPane.YES_NO_CANCEL_OPTION);
+					if (result == JOptionPane.YES_OPTION) System.exit(0);
+				}
 				antallSpillereTilInt = Integer.parseInt(inputAntallSpillere);
 				if (antallSpillereTilInt > 5) {
 					JOptionPane.showMessageDialog(null, "Maks 5 spillere");
@@ -64,6 +70,11 @@ public class YatzooSpillet {
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "vennligst skriv et tall..");
 			startSpill(false);
+		} catch (NullPointerException np) {
+			int result = JOptionPane.showConfirmDialog(null,
+					"Sikker pÃ¥ at du vil avslutte?",
+					"Bekreft avslutt", JOptionPane.YES_NO_CANCEL_OPTION);
+			if (result == JOptionPane.YES_OPTION) System.exit(0);
 		}
 		// iterere gjennon alle spillere som spiller i spillet og hver spiller
 		// skriver sitt spillernavn
@@ -77,22 +88,21 @@ public class YatzooSpillet {
 	}
 
 	/**
-	 * metoden som starter spillet hvis det er første runde blir spillere bedt om å
-	 * legge inn hvor mange spillere som skal spille og etter det blir de spurt om å
+	 * metoden som starter spillet hvis det er fï¿½rste runde blir spillere bedt om ï¿½
+	 * legge inn hvor mange spillere som skal spille og etter det blir de spurt om ï¿½
 	 * skrive inn alle spillere sitt navn dette er lokken som omfatter hele spillet.
 	 * 
 	 * @param boolean
 	 *            om det er et nytt spill, eller om metoden kjores mens et spill
-	 *            foregaar, har med å feilmeldinger aa gjore.
+	 *            foregaar, har med ï¿½ feilmeldinger aa gjore.
 	 */
 	public void startSpill(boolean newGame) {
 		String rundeStr = "";
 		for (int runde = 1; runde < 14; runde++) {
 			if (runde == 1) {
-				int antallSpillereTilInt = 0;
 				if (newGame) {
 					JOptionPane.showMessageDialog(null, "new Game");
-					antallSpillereTilInt = leggTilSpillereIAktivtSpill();
+					leggTilSpillereIAktivtSpill();
 					System.out.print("Spillere");
 					for (Spiller s : spillere) {
 						System.out.print("\t" + s.getNavn() + "|\t");
@@ -107,7 +117,7 @@ public class YatzooSpillet {
 					System.out.print(rundeNavn(runde));
 					System.out.println(resultatBlokk.toString(runde));
 				} else {
-					antallSpillereTilInt = leggTilSpillereIAktivtSpill();
+					leggTilSpillereIAktivtSpill();
 					System.out.print("Spillere");
 					for (Spiller s : spillere) {
 						System.out.print("\t" + s.getNavn() + "|\t");
@@ -184,7 +194,7 @@ public class YatzooSpillet {
 		// har kastet tre kast.
 		while (!fornoyd && kast < 3) {
 			JOptionPane.showMessageDialog(null, "Trill terninger!");
-			// lager et nytt TerningSett av resultatet på terningsettet som bli trilt.
+			// lager et nytt TerningSett av resultatet pï¿½ terningsettet som bli trilt.
 			TerningSett trillet = terningSett.trillTerninger(this.terningSett);
 			JOptionPane.showMessageDialog(null, "Resultat: " + trillet.toString());
 			// etter trillTerninger metoden er kalt vil kast variablen oke.
@@ -298,7 +308,7 @@ public class YatzooSpillet {
 	}
 
 	/**
-	 * Spiller runder basert på hvor mange spillere som spiller spillet
+	 * Spiller runder basert pï¿½ hvor mange spillere som spiller spillet
 	 * 
 	 */
 	public void spillRunde(int runde) {
@@ -316,8 +326,8 @@ public class YatzooSpillet {
 	}
 
 	/**
-	 * finner ut hvor mye poeng en spiller skal få etter en runde er gjennomført og
-	 * så gir denne spilleren riktig mengde poeng, og legger disse poengene inn i
+	 * finner ut hvor mye poeng en spiller skal fï¿½ etter en runde er gjennomfï¿½rt og
+	 * sï¿½ gir denne spilleren riktig mengde poeng, og legger disse poengene inn i
 	 * spilleren si kolonne i resultatTabellen til YatzooSpillet.
 	 * 
 	 * @param s,
