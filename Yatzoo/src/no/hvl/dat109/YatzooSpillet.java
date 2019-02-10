@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.swing.JOptionPane;
+
 /**
  * 
  * @author Perminow
@@ -18,8 +19,7 @@ public class YatzooSpillet {
 	private RegelBok regelBok;
 
 	/**
-	 * standar konstruktor
-	 * opretter et nytt YatzooSpill objekt.
+	 * standar konstruktor opretter et nytt YatzooSpill objekt.
 	 */
 	public YatzooSpillet() {
 		spillere = new ArrayList<Spiller>();
@@ -37,11 +37,11 @@ public class YatzooSpillet {
 	public void leggTilSpiller(Spiller spiller) {
 		spillere.add(spiller);
 	}
+
 	/**
-	 * ber spillere skrive inn hvor mange 
-	 * spillere som skal spille spillet.
-	 * Og for hver spiller ber spille spillerene skrive inn 
-	 * navnet sitt.
+	 * ber spillere skrive inn hvor mange spillere som skal spille spillet. Og for
+	 * hver spiller ber spille spillerene skrive inn navnet sitt.
+	 * 
 	 * @return int antall spillere i aktivt spill.
 	 */
 	public int leggTilSpillereIAktivtSpill() {
@@ -92,8 +92,15 @@ public class YatzooSpillet {
 				int antallSpillereTilInt = 0;
 				if (newGame) {
 					JOptionPane.showMessageDialog(null, "new Game");
-					System.out.println("\t\tSpiller1|\t\tSpiller2|\t\tSpiller3|\t\tSpiller4|\t\tSpiller5| \n");
 					antallSpillereTilInt = leggTilSpillereIAktivtSpill();
+					System.out.print("Spillere");
+					for (Spiller s : spillere) {
+						System.out.print("\t" + s.getNavn() + "|\t");
+					}
+					for(int i=0; i < 5 - spillere.size(); i++) {
+						System.out.print("\t ingen spiller|\t");
+					}
+					System.out.print(" \n");
 					rundeStr = rundeNavn(runde);
 					JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
 					spillRunde(runde);
@@ -102,6 +109,13 @@ public class YatzooSpillet {
 				} else {
 					rundeStr = rundeNavn(runde);
 					antallSpillereTilInt = leggTilSpillereIAktivtSpill();
+					for (Spiller s : spillere) {
+						if (s.getNavn().equals(null)) {
+							s.setNavn("ingen Spiller");
+							System.out.print("\t\t" + s.getNavn() + "|");
+						}
+						System.out.print(" \n");
+					}
 					JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
 					spillRunde(runde);
 					System.out.print(rundeNavn(runde));
@@ -109,17 +123,28 @@ public class YatzooSpillet {
 				}
 			} else {
 				rundeStr = rundeNavn(runde);
-				if(runde != 13) {
-				JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
-				spillRunde(runde);
-				}else {
-				JOptionPane.showMessageDialog(null,
-						"Viser naa: " + rundeStr);
-				resultatBlokk.totalResultat();
-				System.out.print(rundeNavn(runde));
-				System.out.println(resultatBlokk.toString(runde));
-				System.out.println("vinneren er: " + spillerVant().getNavn() + "!!!!!!!!!");
-				return;
+				if (runde != 13) {
+					JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
+					spillRunde(runde);
+				} else {
+					JOptionPane.showMessageDialog(null, "Viser naa: " + rundeStr);
+					resultatBlokk.totalResultat();
+					System.out.print(rundeNavn(runde));
+					System.out.println(resultatBlokk.toString(runde));
+					int[][] resultatTabellen = resultatBlokk.getResultatTabell();
+					Spiller vinner = spillerVant();
+					int vinnerScore = resultatTabellen[spillere.indexOf(vinner)][12];
+					for(Spiller s: spillere) {
+					if(!s.equals(vinner) && resultatTabellen[spillere.indexOf(s)][12] == vinnerScore){
+						System.out.println("Det ble uavgjor mellom: "
+					+ s.getNavn() + " og " + spillerVant().getNavn() + "begge hadde: " + vinnerScore + " poeng!"
+					);
+						return;
+					}
+					}
+					System.out.println("vinneren er: " + spillerVant().getNavn() + "!!!!!!!!!");
+					return;
+					
 				}
 				System.out.print(rundeNavn(runde));
 				System.out.println(resultatBlokk.toString(runde));
@@ -181,17 +206,17 @@ public class YatzooSpillet {
 			}
 		}
 	}
-	
+
 	public boolean finnUnikVerdi(String string) {
 		Set<String> funnetBokstaver = new HashSet<String>();
-	    for (String s: string.split("")) {
-	        if(funnetBokstaver.contains(s)){
-	            return false;
-	        }
-	        funnetBokstaver.add(s);
-	    }              
-	    return true;   
-		
+		for (String s : string.split("")) {
+			if (funnetBokstaver.contains(s)) {
+				return false;
+			}
+			funnetBokstaver.add(s);
+		}
+		return true;
+
 	}
 
 	/**
@@ -220,14 +245,6 @@ public class YatzooSpillet {
 			}
 			return;
 		}
-		// hvis det kun er en terning i terningSettet vil ikke spilleren trenge aa velge
-		// saa metoden bare legger terningen til behold terningsettet og returnerer
-		// metoden,
-		// saa den ikke kjorer videre.
-		if (trillet.getTerningSett().size() <= 1) {
-			spiller.getBehold().leggTilTerning(trillet.getTerningSett().get(0));
-			return;
-		}
 		boolean riktigInput = false;
 		String beholde = "";
 		while (!riktigInput) {
@@ -238,8 +255,8 @@ public class YatzooSpillet {
 					riktigInput = true;
 				}
 				Integer.parseInt(beholde);
-				if(finnUnikVerdi(beholde)){
-				riktigInput = true;
+				if (finnUnikVerdi(beholde)) {
+					riktigInput = true;
 				}
 			} catch (NumberFormatException e) {
 				continue;
@@ -258,7 +275,7 @@ public class YatzooSpillet {
 		for (int i = 0; i < beholdeArray.length; i++) {
 			if (beholde.isEmpty() || beholde.equals("")) {
 				continue;
-				}
+			}
 			int tallet = Integer.parseInt(beholdeArray[i]);
 			switch (tallet) {
 			case 1:
@@ -290,28 +307,36 @@ public class YatzooSpillet {
 			if (s == null) {
 				continue;
 			}
-			if(runde != 13) {
-			spillTrekk(s);
+			if (runde != 13) {
+				spillTrekk(s);
 			}
-			giPoeng(s,runde,index);
+			giPoeng(s, runde, index);
 			index++;
 		}
 	}
+
 	/**
-	 * finner ut hvor mye poeng en spiller skal få etter en runde er gjennomført
-	 * og så gir denne spilleren riktig mengde poeng, og legger disse poengene
-	 * inn i spilleren si kolonne i resultatTabellen til YatzooSpillet.
-	 * @param s, Spiller s, den spilleren som skal faa poeng
-	 * @param runde, int runde hvilke runde vi er paa
-	 * @param index int index, spilleren sin index i resultatTabellen
+	 * finner ut hvor mye poeng en spiller skal få etter en runde er gjennomført og
+	 * så gir denne spilleren riktig mengde poeng, og legger disse poengene inn i
+	 * spilleren si kolonne i resultatTabellen til YatzooSpillet.
+	 * 
+	 * @param s,
+	 *            Spiller s, den spilleren som skal faa poeng
+	 * @param runde,
+	 *            int runde hvilke runde vi er paa
+	 * @param index
+	 *            int index, spilleren sin index i resultatTabellen
 	 */
-	public void giPoeng(Spiller s,int runde, int index) {
-		//naar vi skal sjekke nLike bruker jeg (runde - 4) siden det er felles for baade 3 like og 4 like
-		//naar runde er 7 som er 3 like vil poeng vaere 3 og antall like vaere 3 samme for runde 8.
-		//da er nLike 4.
+	public void giPoeng(Spiller s, int runde, int index) {
+		// naar vi skal sjekke nLike bruker jeg (runde - 4) siden det er felles for
+		// baade 3 like og 4 like
+		// naar runde er 7 som er 3 like vil poeng vaere 3 og antall like vaere 3 samme
+		// for runde 8.
+		// da er nLike 4.
 		int nLike = runde - 4;
-		//maa trekke fra en paa runde siden runde starter paa 1 og resultattabellen starter paa 0.
-		int tabellIndexRunde = runde -1;
+		// maa trekke fra en paa runde siden runde starter paa 1 og resultattabellen
+		// starter paa 0.
+		int tabellIndexRunde = runde - 1;
 		if (runde < 7) {
 			resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, (regelBok.dyr(s.getBehold(), rundeNavn(runde))));
 		} else {
@@ -324,9 +349,9 @@ public class YatzooSpillet {
 				}
 				break;
 			case 8:
-				if(regelBok.nLike(s.getBehold(), nLike)) {
+				if (regelBok.nLike(s.getBehold(), nLike)) {
 					resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, nLike);
-				}else {
+				} else {
 					resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, 0);
 				}
 				break;
@@ -366,23 +391,27 @@ public class YatzooSpillet {
 	 * @return Spiller: spilleren som vant
 	 */
 	public Spiller spillerVant() {
-		Spiller spiller =null;
+		Spiller spiller = null;
 		int score = 0;
 		int hittilStorst = 0;
-		for(Spiller s: spillere) {
+		for (Spiller s : spillere) {
 			score = resultatBlokk.getResultatTabell()[spillere.indexOf(s)][12];
-			if(hittilStorst == 0 || score > hittilStorst) {
-			hittilStorst = score;
-			spiller = s;
+			if (hittilStorst == 0 || score > hittilStorst) {
+				hittilStorst = score;
+				spiller = s;
 			}
 		}
-		
+
 		return spiller;
 
 	}
+
 	/**
-	 * metode for aa finne ut hvilke runde i integer som hoerer til hvilket rundenavn 
-	 * @param runde, int runde nummer
+	 * metode for aa finne ut hvilke runde i integer som hoerer til hvilket
+	 * rundenavn
+	 * 
+	 * @param runde,
+	 *            int runde nummer
 	 * @return String navnet paa runden som er gitt i parameteret.
 	 */
 	public static String rundeNavn(int runde) {
