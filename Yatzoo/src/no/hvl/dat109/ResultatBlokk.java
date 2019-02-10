@@ -1,6 +1,5 @@
 package no.hvl.dat109;
 
-import java.util.Arrays;
 
 /**
  * @author Perminow
@@ -15,7 +14,7 @@ public class ResultatBlokk {
 	}
 	/**
 	 * gaar igjennom resultatTabellen og summerer totalpoengene for hver spiller 
-	 * og putter dem nederst i tabellen slik at man kan se hvor mye poeng hver spiller har faatt.¨
+	 * og putter dem nederst i tabellen slik at man kan se hvor mye poeng hver spiller har faatt.ï¿½
 	 * brukes videre til aa finne vinner i finnVinner metoden i YatzooSpillet.
 	 */
 	public void totalResultat() {
@@ -53,7 +52,7 @@ public class ResultatBlokk {
 		this.resultatTabell = resultatTabell;
 	}
 	/**
-	 * toString metode som omgjør en spesifikk rad i tabellen
+	 * toString metode som omgjï¿½r en spesifikk rad i tabellen
 	 * til en string med en 
 	 * en oversiktlig form for aa vise resultater.
 	 * @param runde hvilke runde som det gjelder

@@ -1,6 +1,5 @@
 package no.hvl.dat109;
 
-import java.util.ArrayList;
 /**
  * 
  * @author Perminow
@@ -28,7 +27,7 @@ public class Spiller {
 		this.behold = new TerningSett();
 	}
 	/**
-	 * triller alle terningene i et terningssett, får hvor mange terninger det er i terningssettet fra 
+	 * triller alle terningene i et terningssett, fï¿½r hvor mange terninger det er i terningssettet fra 
 	 * Terningssettet som puttes inn som parameter
 	 * @param terninger, datatype: TerningsSett 
 	 */
