@@ -74,7 +74,27 @@ class UnitTestRegler {
 	
 	@Test
 	void testUlike() {
-		//TODO: finne ut om Ulike funker
+		for( int i = 0; i < ts.getAntallTerninger(); i++) {
+			switch(i) {
+			case 0:
+				ts.getTerningSett().get(i).setDyr("panda");
+				break;
+			case 1:
+				ts.getTerningSett().get(i).setDyr("love");
+				break;
+			case 2:
+				ts.getTerningSett().get(i).setDyr("gris");
+				break;
+			case 3:
+				ts.getTerningSett().get(i).setDyr("elefant");
+				break;
+			case 4:
+				ts.getTerningSett().get(i).setDyr("hval");
+				break;
+			}
+		}
+		System.out.println(ts.toString());
+		assertTrue(regler.enAvHver(ts));
 	}
 	
 	

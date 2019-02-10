@@ -7,8 +7,6 @@ import java.util.HashMap;
 
 public class RegelBok {
 
-	
-
 	public RegelBok() {
 
 	}
@@ -70,7 +68,9 @@ public class RegelBok {
 
 	/**
 	 * Sjekker terningsett listen om det er to par der, printer ut de parene
-	 * @param TerningSett terningene
+	 * 
+	 * @param TerningSett
+	 *            terningene
 	 * @return boolean om det finnes to unike par i terningSettet.
 	 */
 	public boolean toPar(TerningSett terningene) {
@@ -97,8 +97,10 @@ public class RegelBok {
 	}
 
 	/**
-	 * Et par og 3 like i et terningsett 
-	 * @param TerningSett: terningene.
+	 * Et par og 3 like i et terningsett
+	 * 
+	 * @param TerningSett:
+	 *            terningene.
 	 * @return boolean om det stemmer for det gitte terningSettet.
 	 */
 	public boolean hus(TerningSett terningene) {
@@ -134,13 +136,27 @@ public class RegelBok {
 	 *            terningene
 	 * @return 1 poeng dersom det stemmer
 	 */
-	public int enAvHver(TerningSett terningene) {
-		int sum = 0;
-		long unike = terningene.getTerningSett().stream().distinct().count();
-		if (unike == 6) {
-			sum = 1;
-		}
-		return sum;
-	}
+	public boolean enAvHver(TerningSett terningene) {
+		ArrayList<Terning> terninger = terningene.getTerningSett();
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		boolean enAvhver = true;
+		int i = 0;
+		for (Terning terning : terninger) {
+			i = map.getOrDefault(terning.getDyr(), 0);
+			i++;
+			map.put(terning.getDyr(), i);
 
+		}
+		for (Terning terning : terninger) {
+			int antallLike = map.getOrDefault(terning.getDyr(), 0);
+			if (antallLike > 1) {
+				if (enAvhver) {
+					enAvhver = false;
+				} else {
+					return false;
+				}
+			}
+		}
+		return enAvhver;
+	}
 }

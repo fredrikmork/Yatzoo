@@ -243,7 +243,7 @@ public class YatzooSpillet {
 		for (int i = 0; i < beholdeArray.length; i++) {
 			if (beholde.isEmpty() || beholde.equals("")) {
 				continue;
-			}
+				}
 			int tallet = Integer.parseInt(beholdeArray[i]);
 			switch (tallet) {
 			case 1:
@@ -330,7 +330,7 @@ public class YatzooSpillet {
 				}
 				break;
 			case 11:
-				if (regelBok.enAvHver(s.getBehold()) == 1) {
+				if (regelBok.enAvHver(s.getBehold())) {
 					resultatBlokk.leggTilRundeRes(index, tabellIndexRunde, 5);
 				}
 				break;
