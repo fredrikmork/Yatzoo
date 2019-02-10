@@ -107,15 +107,15 @@ public class YatzooSpillet {
 					System.out.print(rundeNavn(runde));
 					System.out.println(resultatBlokk.toString(runde));
 				} else {
-					rundeStr = rundeNavn(runde);
 					antallSpillereTilInt = leggTilSpillereIAktivtSpill();
+					System.out.print("Spillere");
 					for (Spiller s : spillere) {
-						if (s.getNavn().equals(null)) {
-							s.setNavn("ingen Spiller");
-							System.out.print("\t\t" + s.getNavn() + "|");
-						}
-						System.out.print(" \n");
+						System.out.print("\t" + s.getNavn() + "|\t");
 					}
+					for(int i=0; i < 5 - spillere.size(); i++) {
+						System.out.print("\t ingen spiller|\t");
+					}
+					System.out.print(" \n");
 					JOptionPane.showMessageDialog(null, "vi spiller naa runde: " + rundeStr);
 					spillRunde(runde);
 					System.out.print(rundeNavn(runde));

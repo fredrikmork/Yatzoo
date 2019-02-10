@@ -1,6 +1,6 @@
 package no.hvl.dat109;
 /**
- * 
+ *
  * @author Perminow
  *
  */
