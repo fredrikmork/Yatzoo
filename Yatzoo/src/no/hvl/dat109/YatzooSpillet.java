@@ -1,7 +1,8 @@
 package no.hvl.dat109;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.JOptionPane;
 /**
@@ -180,6 +181,18 @@ public class YatzooSpillet {
 			}
 		}
 	}
+	
+	public boolean finnUnikVerdi(String string) {
+		Set<String> funnetBokstaver = new HashSet<String>();
+	    for (String s: string.split("")) {
+	        if(funnetBokstaver.contains(s)){
+	            return false;
+	        }
+	        funnetBokstaver.add(s);
+	    }              
+	    return true;   
+		
+	}
 
 	/**
 	 * leggtilside metoden tar et valgt antall terninger og putter i et terningsett
@@ -225,7 +238,9 @@ public class YatzooSpillet {
 					riktigInput = true;
 				}
 				Integer.parseInt(beholde);
+				if(finnUnikVerdi(beholde)){
 				riktigInput = true;
+				}
 			} catch (NumberFormatException e) {
 				continue;
 			}

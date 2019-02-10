@@ -98,9 +98,7 @@ public class RegelBok {
 
 	/**
 	 * Et par og 3 like i et terningsett
-	 * 
-	 * @param TerningSett:
-	 *            terningene.
+	 * @param TerningSett: terningene.
 	 * @return boolean om det stemmer for det gitte terningSettet.
 	 */
 	public boolean hus(TerningSett terningene) {
@@ -134,7 +132,7 @@ public class RegelBok {
 	 * 
 	 * @param TerningSett
 	 *            terningene
-	 * @return 1 poeng dersom det stemmer
+	 * @return boolean enAvHver og finner ut om det stemmer for terningsSettet gitt i parameteret.
 	 */
 	public boolean enAvHver(TerningSett terningene) {
 		ArrayList<Terning> terninger = terningene.getTerningSett();
